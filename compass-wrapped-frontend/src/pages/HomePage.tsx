@@ -56,7 +56,6 @@ const HomePage: React.FC = () => {
       const response = await getAllAnalytics(file);
       setAnalyticsData(response.data);
       
-      // Navigate to summary page
       navigate('/summary');
     } catch (error) {
       console.error('Error uploading file:', error);
