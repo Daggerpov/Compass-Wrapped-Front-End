@@ -16,7 +16,7 @@ const PersonalitySlide: React.FC<PersonalitySlideProps> = ({ personalityType, co
           bgColor: 'bg-[#0B2447]',
           textColor: 'text-white',
           icon: (
-            <svg className="w-32 h-32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-24 h-24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M20.9992 12.8076C20.8043 16.8779 17.3893 20.1565 13.0744 19.9921C8.75945 19.8276 5.17431 16.2424 5.00989 11.9275C4.84547 7.61253 8.12404 4.19752 12.1944 4.00262C10.6511 6.92655 11.3919 10.5361 13.9637 12.6433C16.5355 14.7505 20.1649 14.8946 22.9994 13.0001C22.3396 13.0148 21.6708 12.9464 20.9992 12.8076Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           )
@@ -73,7 +73,7 @@ const PersonalitySlide: React.FC<PersonalitySlideProps> = ({ personalityType, co
       
       {/* Add an owl for Night Rider */}
       {personalityType.toLowerCase().includes('night') && (
-        <div className="absolute right-8 bottom-8 w-32 h-32 opacity-90">
+        <div className="absolute right-8 bottom-8 w-24 h-24 opacity-90">
           <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M50 85C67.6731 85 82 70.6731 82 53C82 35.3269 67.6731 21 50 21C32.3269 21 18 35.3269 18 53C18 70.6731 32.3269 85 50 85Z" fill="#8DA6C8" fillOpacity="0.2"/>
             <path d="M30 41C32.7614 41 35 38.7614 35 36C35 33.2386 32.7614 31 30 31C27.2386 31 25 33.2386 25 36C25 38.7614 27.2386 41 30 41Z" fill="white"/>

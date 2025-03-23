@@ -73,13 +73,13 @@ const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
       {/* Background image - skyline with reduced size */}
-      <div className="absolute bottom-0 left-0 right-0 w-full h-32 z-0">
+      <div className="absolute bottom-0 left-0 right-0 w-full h-24 z-0">
         <img src={skyline} alt="Vancouver Skyline" className="w-full h-full object-cover object-bottom opacity-30" />
       </div>
       
       {/* Animated SkyTrain with reduced size */}
-      <div className={`absolute bottom-32 transition-all duration-10000 ease-linear ${animateTrain ? 'left-full -translate-x-full' : '-left-20'}`}>
-        <img src={skytrain} alt="SkyTrain" className="h-8 w-auto" />
+      <div className={`absolute bottom-24 transition-all duration-10000 ease-linear ${animateTrain ? 'left-full -translate-x-full' : '-left-20'}`}>
+        <img src={skytrain} alt="SkyTrain" className="h-6 w-auto" />
       </div>
       
       {/* Header */}
@@ -101,7 +101,7 @@ const HomePage: React.FC = () => {
           {/* Left side - Compass Card */}
           <div className="w-full lg:w-2/5 flex justify-center lg:justify-end transform hover:rotate-3 transition-transform">
             <div className="w-full max-w-sm mx-auto mb-6">
-              <img src={compassCard} alt="Compass Card" className="w-full max-w-xs mx-auto drop-shadow-lg" />
+              <img src={compassCard} alt="Compass Card" className="w-full max-w-xs mx-auto drop-shadow-lg" style={{ maxWidth: "220px" }} />
             </div>
           </div>
           
