@@ -1,3 +1,7 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import busStopImage from '../../assets/new-from-figma/bus-stop-sign-example-sg-n10-removebg-preview 1.png';
+
 interface StopData {
   stop_name: string;
   count?: number;
@@ -15,34 +19,60 @@ const DEFAULT_STOPS: StopData[] = [
 
 const StopsSlide: React.FC<StopsSlideProps> = ({ topStops = DEFAULT_STOPS }) => {
   return (
-    <div className="width-container">
-      <div 
-        className={`border-2 border-dashed rounded-xl p-6 flex-col-center`}>
-        <div className="w-full h-full flex flex-col items-center justify-between bg-translink-yellow text-translink-blue px-6 py-10">
-          <h2 className="text-xl font-semibold text-center mb-4">My Top Stops:</h2>
-          
-          <div className="flex-1 flex flex-col justify-center w-full max-w-xs">
-            <ol className="list-decimal pl-8 space-y-4">
-              {topStops.map((stop, index) => (
-                <li key={index} className="text-xl font-semibold">
-                  {stop.stop_name}
-                </li>
-              ))}
-            </ol>
-          </div>
-          
-          <div className="mt-auto">
-            <h3 className="text-xl font-semibold mb-2">My Top Stations:</h3>
-            <ol className="list-decimal pl-8 space-y-2">
-              {topStops.map((stop, index) => (
-                <li key={`station-${index}`} className="text-lg">
-                  {stop.stop_name}
-                </li>
-              ))}
-            </ol>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-translink-blue via-blue-700 to-blue-900 text-white p-6">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-2xl mx-auto pt-12"
+      >
+        <div className="text-center space-y-12">
+          <motion.div
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="space-y-6"
+          >
+            <h2 className="text-4xl font-bold tracking-wide">Most Visited Stops</h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="space-y-6"
+          >
+            {topStops.map((stop, index) => (
+              <motion.div
+                key={index}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.3 + index * 0.2 }}
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex items-center justify-between"
+              >
+                <div className="flex items-center space-x-4">
+                  <span className="text-2xl font-bold text-blue-200">#{index + 1}</span>
+                  <span className="text-xl font-medium">{stop.stop_name}</span>
+                </div>
+                <span className="text-xl font-bold text-blue-200">{stop.count} visits</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.9, duration: 0.5 }}
+            className="relative h-48 mt-8"
+          >
+            <img
+              src={busStopImage}
+              alt="Bus Stop Sign"
+              className="absolute left-1/2 transform -translate-x-1/2 h-full w-auto object-contain drop-shadow-2xl"
+            />
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
