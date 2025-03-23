@@ -4,6 +4,7 @@ import { DataProvider } from './context/DataContext'
 import HomePage from './pages/HomePage'
 import SummaryPage from './pages/SummaryPage'
 import SharePage from './pages/SharePage'
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/share" element={<SharePage />} />
         </Routes>
       </Router>
+      <Analytics />
     </DataProvider>
   )
 }

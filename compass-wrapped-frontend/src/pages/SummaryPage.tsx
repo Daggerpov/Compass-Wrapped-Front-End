@@ -115,21 +115,21 @@ const SummaryPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="relative z-10 pt-6 pb-4 px-6 bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
-          <div className="w-24 mb-4 sm:mb-0">
-            <img src={translinkLogo} alt="TransLink Logo" className="w-full" />
+      <header className="header">
+        <div className="container-custom py-4 flex flex-col sm:flex-row justify-between items-center">
+          <div className="mb-4 sm:mb-0">
+            <img src={translinkLogo} alt="TransLink Logo" className="img-logo" />
           </div>
           <div className="flex items-center gap-3">
-            <img src={compassCard} alt="Compass Card" className="h-6 w-auto" />
+            <img src={compassCard} alt="Compass Card" className="img-icon" />
             <h2 className="text-xl font-medium text-translink-blue">Compass Wrapped 2023</h2>
           </div>
         </div>
       </header>
 
       {/* Content area */}
-      <div className="max-w-7xl mx-auto py-6 px-4">
-        <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="container-custom py-8">
+        <div className="card p-6">
           <Slideshow 
             activeIndex={activeSlideIndex}
             onChange={handleSlideChange}
@@ -200,14 +200,14 @@ const SummaryPage: React.FC = () => {
         </div>
         
         {/* Share buttons */}
-        <div className="flex justify-center mt-8">
-          <button className="bg-translink-blue text-white px-6 py-3 rounded-full font-medium mx-2 hover:bg-blue-700 transition-colors flex items-center">
+        <div className="flex justify-center mt-8 gap-4">
+          <button className="btn btn-primary flex items-center">
             <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
             </svg>
             Share Results
           </button>
-          <button className="bg-white text-translink-blue border-2 border-translink-blue px-6 py-3 rounded-full font-medium mx-2 hover:bg-gray-100 transition-colors flex items-center">
+          <button className="btn btn-outline flex items-center">
             <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>

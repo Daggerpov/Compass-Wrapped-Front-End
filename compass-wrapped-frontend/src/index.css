@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --translink-blue: #0066B3;
+  --translink-secondary: #0088CC;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -10,21 +12,125 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Global styles */
 body {
+  @apply antialiased text-gray-800 bg-gray-50;
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
   background-color: #f5f5f5;
 }
 
+/* Image size constraints */
+.img-icon {
+  @apply w-6 h-6;
+}
+
+.img-logo {
+  @apply w-20 h-auto max-h-8;
+}
+
+.img-card {
+  @apply w-full max-w-[180px] md:max-w-[220px] mx-auto drop-shadow-lg;
+}
+
+.img-hero {
+  @apply w-full max-w-[300px] md:max-w-[400px] mx-auto;
+}
+
+/* Animations */
+.slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300;
+}
+
+.card-hover {
+  @apply hover:scale-[1.02] transition-transform duration-300;
+}
+
+/* Button styles */
+.btn {
+  @apply px-6 py-3 rounded-full font-medium transition-all duration-300;
+}
+
+.btn-primary {
+  @apply bg-translink-blue text-white hover:bg-translink-secondary;
+}
+
+.btn-outline {
+  @apply bg-white text-translink-blue border-2 border-translink-blue hover:bg-gray-50;
+}
+
+/* Header styles */
+.header {
+  @apply bg-white shadow-sm sticky top-0 z-50;
+}
+
+/* Container styles */
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Typography */
+h1 {
+  @apply text-4xl font-bold text-gray-900 mb-4;
+}
+
+h2 {
+  @apply text-2xl font-semibold text-gray-800 mb-3;
+}
+
+/* Responsive adjustments */
+@screen sm {
+  .img-card {
+    max-width: 220px;
+  }
+}
+
+@screen md {
+  .img-hero {
+    max-width: 400px;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full hover:bg-gray-400;
+}
+
+/* Loading animations */
+.loading-pulse {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+/* Transitions */
+.transition-custom {
+  @apply transition-all duration-300 ease-in-out;
+}
+
 .translink-gradient {
   background: linear-gradient(to right, #0066B3, #004B8D);
-}
-
-.card {
-  @apply bg-white rounded-lg shadow-md p-6 transition-transform duration-300;
-}
-
-.card:hover {
-  @apply transform scale-105;
 }
