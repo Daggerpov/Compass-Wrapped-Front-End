@@ -25,7 +25,7 @@ const AchievementsSlide: React.FC<AchievementsSlideProps> = ({ achievements, tot
         );
       case 'distance':
         return (
-          <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-10 h-10 text-blue-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M7 4.5C7 6.433 9.5 11 12 11C14.5 11 17 6.433 17 4.5C17 2.567 14.761 1 12 1C9.239 1 7 2.567 7 4.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M14 15L16.25 17.25M19.25 20.25L16.25 17.25M16.25 17.25L19 14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M4 22C4 19.2071 5.40794 16.7189 7.5 15.2555M12.5 13.5C15.8152 13.5 18.5788 15.9242 19.326 19.0673" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -33,32 +33,32 @@ const AchievementsSlide: React.FC<AchievementsSlideProps> = ({ achievements, tot
         );
       case 'night':
         return (
-          <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-10 h-10 text-indigo-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20.9992 12.8076C20.8043 16.8779 17.3893 20.1565 13.0744 19.9921C8.75945 19.8276 5.17431 16.2424 5.00989 11.9275C4.84547 7.61253 8.12404 4.19752 12.1944 4.00262C10.6511 6.92655 11.3919 10.5361 13.9637 12.6433C16.5355 14.7505 20.1649 14.8946 22.9994 13.0001C22.3396 13.0148 21.6708 12.9464 20.9992 12.8076Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         );
       case 'weekend':
         return (
-          <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-10 h-10 text-purple-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M7 10V16M12 10V16M17 10V16M22 6H2M20 6L18.414 19.519C18.3939 19.6761 18.3406 19.8278 18.2589 19.9665C18.1771 20.1052 18.0684 20.2284 17.9391 20.3294C17.8098 20.4303 17.6625 20.5072 17.5049 20.556C17.3473 20.6048 17.1824 20.6246 17.017 20.614H6.983C6.81757 20.6246 6.65274 20.6048 6.49511 20.556C6.33748 20.5072 6.19016 20.4303 6.06092 20.3294C5.93168 20.2284 5.82294 20.1052 5.74116 19.9665C5.65938 19.8278 5.6061 19.6761 5.586 19.519L4 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M9.5 6C9.5 4.067 10.567 3 12 3C13.433 3 14.5 4.067 14.5 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         );
       case 'explorer':
         return (
-          <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-10 h-10 text-green-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3 11L3 17.8C3 18.9201 3 19.4801 3.21799 19.9079C3.40973 20.2842 3.71547 20.5905 4.09175 20.7822C4.5192 21 5.07899 21 6.19691 21H17.8031C18.921 21 19.48 21 19.9074 20.7822C20.2837 20.5905 20.5905 20.2842 20.7822 19.9079C21 19.48 21 18.921 21 17.8031V11M3 11H21M3 11L5.8 6.4C5.92557 6.14819 6 5.9 6 5.9C6 5.9 6.07321 6.14558 6.2 6.4L9 11M21 11L18.2 6.4C18.0744 6.14819 18 5.9 18 5.9C18 5.9 17.9268 6.14558 17.8 6.4L15 11M15 7H9M10 15H14M10 18H14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         );
       case 'regular':
         return (
-          <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-10 h-10 text-cyan-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 7V12M12 12L15 15M12 12L9 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         );
       default:
         return (
-          <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-10 h-10 text-gray-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M19.5 12C19.5 16.1421 16.1421 19.5 12 19.5C7.85786 19.5 4.5 16.1421 4.5 12C4.5 7.85786 7.85786 4.5 12 4.5C16.1421 4.5 19.5 7.85786 19.5 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M12 4.5V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -155,7 +155,7 @@ const AchievementsSlide: React.FC<AchievementsSlideProps> = ({ achievements, tot
           </div>
           
           {/* Decorative background */}
-          <div className="absolute right-0 bottom-0 w-20 h-20 opacity-10">
+          <div className="absolute right-0 bottom-0 w-16 h-16 opacity-10">
             <svg className="w-full h-full" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
               <path d="M12 6V12L16 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
