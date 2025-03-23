@@ -1,26 +1,40 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDropzone } from 'react-dropzone';
+import { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
 import { getAllAnalytics } from '../services/api';
-import { useDropzone } from 'react-dropzone';
 import translinkLogo from '../assets/translink-logo.svg';
 import compassCard from '../assets/compass-card.svg';
 import skyline from '../assets/skyline.svg';
 import skytrain from '../assets/skytrain.svg';
 import CSVInstructions from '../components/CSVInstructions';
 
-const HomePage: React.FC = () => {
+export default function HomePage() {
   const { setFile, setAnalyticsData, setLoading, setError } = useContext(DataContext);
-  const [isDragging, setIsDragging] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [timeRange, setTimeRange] = useState('month');
   const navigate = useNavigate();
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    // Handle file upload logic here
-    console.log('Files uploaded:', acceptedFiles);
-    setIsUploaded(true);
-  }, []);
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    if (acceptedFiles.length > 0) {
+      const file = acceptedFiles[0];
+      setLoading(true);
+      setError(null);
+      
+      try {
+        const response = await getAllAnalytics(file);
+        setAnalyticsData(response.data);
+        setFile(file);
+        setIsUploaded(true);
+      } catch (error) {
+        setError('Error processing file. Please try again.');
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  }, [setFile, setAnalyticsData, setLoading, setError]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -158,6 +172,4 @@ const HomePage: React.FC = () => {
       </footer>
     </div>
   );
-};
-
-export default HomePage; 
+} 
