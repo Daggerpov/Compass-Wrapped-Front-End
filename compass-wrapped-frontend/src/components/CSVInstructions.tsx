@@ -27,12 +27,14 @@ const CSVInstructions = () => {
   ];
 
   return (
-    <div className="bg-white/95 rounded-lg shadow-sm p-5 sm:p-6 max-w-2xl w-full mx-auto border border-gray-100 flex flex-col items-center">
-      <h3 className="text-base font-semibold text-center mb-5 text-gray-800 w-full">
-        How to Get Your Transit Data
-      </h3>
+    <div className="bg-white/95 rounded-lg shadow-sm p-5 sm:p-6 max-w-2xl w-full mx-auto border border-gray-100 flex flex-col items-center justify-center">
+      <div className="flex items-center justify-center w-full mb-5">
+        <h3 className="text-base font-semibold text-center text-gray-800">
+          How to Get Your Transit Data
+        </h3>
+      </div>
       
-      <div className="space-y-3 relative w-full max-w-xl">
+      <div className="space-y-3 relative w-full max-w-xl mx-auto">
         {/* Progress Line */}
         <div className="absolute left-4 top-4 w-0.5 h-[calc(100%-40px)] bg-gradient-to-b from-translink-blue/5 via-translink-blue/20 to-translink-blue/5 hidden sm:block"></div>
         

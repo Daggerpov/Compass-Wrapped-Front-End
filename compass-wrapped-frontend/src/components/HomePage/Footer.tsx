@@ -3,7 +3,7 @@ import React from 'react';
 const Footer: React.FC = () => {
   return (
     <footer className="w-full relative z-10 border-t border-blue-100/50 mt-16 bg-gradient-to-t from-white to-translink-gray/20 backdrop-blur-sm">
-      <div className="container-custom py-8 flex flex-col items-center">
+      <div className="container max-w-[1200px] mx-auto px-4 sm:px-6 py-8 flex flex-col items-center justify-center">
         <div className="flex flex-col sm:flex-row justify-between items-center w-full max-w-4xl">
           <div className="mb-4 sm:mb-0 text-center sm:text-left">
             <p className="text-sm text-gray-600 mb-1">© 2024 TransLink. All rights reserved.</p>

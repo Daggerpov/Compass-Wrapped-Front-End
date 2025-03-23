@@ -24,7 +24,7 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
   getTimeRangeText
 }) => {
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center justify-center">
       <div 
         {...getRootProps()} 
         className={`card w-full max-w-2xl p-10 text-center cursor-pointer transition-all duration-300 shadow-md rounded-2xl hover:shadow-card animate-slide-up ${
@@ -57,7 +57,7 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
       </div>
 
       {isUploaded && (
-        <div className="mt-8 text-center animate-slide-up w-full flex flex-col items-center" style={{ animationDelay: '0.45s' }}>
+        <div className="mt-8 text-center animate-slide-up w-full flex flex-col items-center justify-center" style={{ animationDelay: '0.45s' }}>
           <Button
             onClick={handleContinue}
             size="lg"

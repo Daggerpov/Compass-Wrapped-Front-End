@@ -13,7 +13,7 @@ const TimeRangeSelector: React.FC<TimeRangeSelectorProps> = ({
   getTimeRangeText 
 }) => {
   return (
-    <div className="text-center mb-10 animate-slide-up w-full flex flex-col items-center">
+    <div className="text-center mb-10 animate-slide-up w-full flex flex-col items-center justify-center">
       <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-translink-blue/15 to-translink-light-blue/30 text-translink-blue font-medium rounded-full mb-4 text-xs shadow-sm">
         Your Personal Transit Journey
       </span>
@@ -25,7 +25,7 @@ const TimeRangeSelector: React.FC<TimeRangeSelectorProps> = ({
         Upload your Compass Card data to visualize and explore your transit habits and patterns
       </p>
 
-      <div className="flex justify-center gap-3 mb-6">
+      <div className="flex justify-center items-center gap-3 mb-6">
         {['week', 'month', 'year'].map((range) => (
           <Button
             key={range}

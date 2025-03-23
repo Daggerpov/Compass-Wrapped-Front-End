@@ -9,7 +9,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ timeRangeText }) => {
   return (
     <header className="header backdrop-blur-md bg-white/95 sticky top-0 z-50 shadow-sm border-b border-blue-50 w-full">
-      <div className="container-custom py-4 flex flex-col sm:flex-row justify-center items-center">
+      <div className="container max-w-[1200px] mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-center">
         <div className="mb-2 sm:mb-0 transition-transform duration-300 hover:scale-105 sm:mr-auto">
           <img src={translinkLogo} alt="TransLink Logo" className="h-6 sm:h-7" />
         </div>
