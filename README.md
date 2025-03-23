@@ -22,12 +22,14 @@ Compass Wrapped allows TransLink users to upload their Compass Card CSV data to 
 ## Installation
 
 1. Clone the repository:
+
    ```
    git clone https://github.com/yourusername/Compass-Wrapped-Front-End.git
    cd Compass-Wrapped-Front-End
    ```
 
 2. Navigate to the frontend directory:
+
    ```
    cd compass-wrapped-frontend
    ```
@@ -44,16 +46,21 @@ Compass Wrapped allows TransLink users to upload their Compass Card CSV data to 
 ## Running the Application
 
 1. Make sure you're in the `compass-wrapped-frontend` directory:
+
    ```
    cd compass-wrapped-frontend
    ```
+
    (Skip this step if you're already in the directory)
 
 2. Start the development server:
+
    ```
    npm run dev
    ```
+
    or with yarn:
+
    ```
    yarn dev
    ```
@@ -94,4 +101,3 @@ This application processes Compass Card data locally in your browser. No data is
 ## License
 
 [MIT License](LICENSE)
- 
