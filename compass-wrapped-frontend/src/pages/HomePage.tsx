@@ -13,7 +13,6 @@ const HomePage: React.FC = () => {
   const [animateTrain, setAnimateTrain] = useState(false);
   const navigate = useNavigate();
 
-  // Animation effects when component mounts
   useEffect(() => {
     setTimeout(() => {
       setAnimateTrain(true);
