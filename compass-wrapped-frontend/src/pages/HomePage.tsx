@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Header, Footer, Background, FileDropzone } from '@/components/HomePage';
-import CSVInstructions from '@/components/CSVInstructions';
+import Header from '../components/HomePage/Header';
+import Footer from '../components/HomePage/Footer';
+import Background from '../components/HomePage/Background';
+import FileDropzone from '../components/HomePage/FileDropzone';
+import CSVInstructions from '../components/CSVInstructions';
 
 const HomePage: React.FC = () => {
   const [uploading, setUploading] = useState(false);
