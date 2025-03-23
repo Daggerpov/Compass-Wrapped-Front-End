@@ -3,31 +3,38 @@ import compassCardImg from '../../assets/new-from-figma/compass-card.png';
 
 interface TotalTripsSlideProps {
   totalTrips?: number;
+  month?: string;
+  year?: number;
 }
 
-const TotalTripsSlide: React.FC<TotalTripsSlideProps> = ({ totalTrips = 312 }) => {
+const TotalTripsSlide: React.FC<TotalTripsSlideProps> = ({ 
+  totalTrips = 245, 
+  month = "MARCH",
+  year = 2023
+}) => {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-between bg-translink-blue text-white px-6 py-10">
-      {/* Title */}
-      <h2 className="text-xl font-semibold text-center mb-4">Your Total Trips</h2>
-      
-      {/* Large trip count number */}
-      <div className="text-center">
-        <div className="text-[120px] font-bold leading-none">{totalTrips}</div>
+    <div className="w-full h-full flex flex-col items-center justify-center bg-translink-blue text-white px-6 py-10">
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold">{month}</h2>
+        <h1 className="text-4xl font-bold">COMPASS</h1>
+        <h1 className="text-4xl font-bold mb-8">WRAPPED</h1>
       </div>
       
-      {/* Compass card image */}
-      <div className="mt-auto mb-4 text-center">
-        <img 
-          src={compassCardImg} 
-          alt="Compass Card" 
+      <div className="mt-4 text-center">
+        <div className="text-6xl font-bold mb-2">{totalTrips}</div>
+        <p className="text-xl mb-6">Total Rides</p>
+      </div>
+      
+      <div className="mt-4 flex items-center justify-center">
+        <img
+          src={compassCardImg}
+          alt="Compass Card"
           className="h-16 w-auto inline-block"
         />
-        <p className="text-xs mt-4 max-w-xs opacity-80">
-          That's {Math.round(totalTrips / 30)} trips on average per month!
-          <br />
-          The #99 is your favorite route overall.
-        </p>
+      </div>
+      
+      <div className="mt-6 text-center text-sm opacity-80">
+        <p>That's {Math.round(totalTrips / 30)} trips on average per month in {year}!</p>
       </div>
     </div>
   );

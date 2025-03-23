@@ -12,7 +12,7 @@ const CSVInstructions: React.FC<CSVInstructionsProps> = ({ uploading, uploadedCo
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-white/95 rounded-lg shadow-sm p-5 sm:p-6 width-container border border-gray-100 flex-col-center">
+    <div className="bg-white/95 rounded-lg shadow-sm p-5 sm:p-6 width-container border border-gray-100 flex-col-center w-full max-w-lg mx-auto text-center">
       <Collapsible
         open={isOpen}
         onOpenChange={setIsOpen}
@@ -20,7 +20,7 @@ const CSVInstructions: React.FC<CSVInstructionsProps> = ({ uploading, uploadedCo
       >
         <div className="flex-center w-full mb-5">
           <CollapsibleTrigger asChild>
-            <Button variant="outline" className="flex items-center gap-2">
+            <Button variant="outline" className="flex items-center gap-2 mx-auto">
               {isOpen ? 'Hide' : 'View'} CSV Instructions
               <svg
                 width="15"
@@ -39,7 +39,7 @@ const CSVInstructions: React.FC<CSVInstructionsProps> = ({ uploading, uploadedCo
           </CollapsibleTrigger>
         </div>
 
-        <CollapsibleContent className="space-y-4">
+        <CollapsibleContent className="space-y-4 text-center">
           {uploading ? (
             <div className="flex-col-center gap-4">
               <p>Uploading...</p>
@@ -49,9 +49,9 @@ const CSVInstructions: React.FC<CSVInstructionsProps> = ({ uploading, uploadedCo
               <p>CSV file uploaded successfully!</p>
             </div>
           ) : (
-            <div className="space-y-4">
-              <p className="text-gray-600">To get your CSV file from TransLink please follow these steps:</p>
-              <ol className="list-decimal pl-5 space-y-2 text-gray-600">
+            <div className="space-y-4 flex flex-col items-center">
+              <p className="text-gray-600 mx-auto">To get your CSV file from TransLink please follow these steps:</p>
+              <ol className="list-decimal space-y-2 text-gray-600 text-left max-w-md mx-auto">
                 <li>Go to <a href="https://compasscard.ca" target="_blank" rel="noopener noreferrer" className="text-translink-blue hover:underline">compasscard.ca</a> and log in to your account.</li>
                 <li>Navigate to the "History" tab in your account.</li>
                 <li>Select the date range you want to analyze.</li>

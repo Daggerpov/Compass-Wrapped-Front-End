@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Header, SlideCarousel, NavigationControls } from '../components/SummaryPage';
 import IntroSlide from '../components/slides/IntroSlide';
-import TotalTripsSlide from '../components/slides/TotalTripsSlide';
 import MostTraveledRouteSlide from '../components/slides/MostTraveledRouteSlide';
 import StopsSlide from '../components/slides/StopsSlide';
 import TimeSpentSlide from '../components/slides/TimeSpentSlide';
@@ -18,8 +17,16 @@ interface SlideConfig {
 }
 
 const slides: SlideConfig[] = [
-  { id: 'intro', component: IntroSlide, title: 'Introduction', props: { month: "MARCH" } },
-  { id: 'total-trips', component: TotalTripsSlide, title: 'Total Trips', props: { totalTrips: 312 } },
+  { 
+    id: 'intro', 
+    component: IntroSlide, 
+    title: 'Introduction', 
+    props: { 
+      totalTrips: 245,
+      month: "MARCH",
+      year: 2023 
+    } 
+  },
   { id: 'route', component: MostTraveledRouteSlide, title: 'Most Used Route', props: { routeDirection: "Eastbound", routeName: "University Blvd" } },
   { id: 'stops', component: StopsSlide, title: 'Top Stops' },
   { id: 'time-spent', component: TimeSpentSlide, title: 'Time Spent', props: { hoursSpent: 194, transit: "SkyTrain" } },
