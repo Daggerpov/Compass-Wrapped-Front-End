@@ -1,5 +1,6 @@
 import React from 'react';
-import compassCard from '../../assets/compass-card.svg';
+import compassCardImg from '../../assets/new-from-figma/compass-card.png';
+import compassCardTapImg from '../../assets/new-from-figma/compass-card-tap.png';
 import { Button } from '../../components/ui/button';
 
 interface FileDropzoneProps {
@@ -43,7 +44,11 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
           <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-translink-blue/20 to-translink-light-blue/40 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-inner ${
             isDragActive ? 'scale-110 bg-translink-blue/20' : isHovering ? 'scale-105 bg-translink-blue/15' : ''
           }`}>
-            <img src={compassCard} alt="Upload" className={`w-6 h-6 transition-all duration-300 ${isDragActive ? 'scale-110' : isHovering ? 'scale-105' : ''}`} />
+            <img 
+              src={isDragActive ? compassCardTapImg : compassCardImg} 
+              alt="Upload" 
+              className={`w-10 h-auto transition-all duration-300 ${isDragActive ? 'scale-110' : isHovering ? 'scale-105' : ''}`} 
+            />
           </div>
           <h3 className="text-xl font-semibold mb-3 text-gray-800">
             {isDragActive ? 'Drop to Upload Your File' : 'Upload Your CSV File'}
@@ -63,6 +68,7 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
             size="lg"
             className="bg-gradient-to-r from-translink-blue to-translink-secondary hover:shadow-lg px-8 py-6 text-base font-medium transition-all duration-300"
           >
+            <img src={compassCardImg} alt="" className="w-5 h-5 mr-2" />
             Explore Your {getTimeRangeText()} Transit Insights
           </Button>
           <p className="mt-4 text-base text-gray-500">See your transit patterns, favorite routes, and more</p>

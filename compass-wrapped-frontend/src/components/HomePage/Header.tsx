@@ -1,6 +1,6 @@
 import React from 'react';
-import translinkLogo from '../../assets/translink-logo.svg';
-import compassCard from '../../assets/compass-card.svg';
+import translinkLogoImg from '../../assets/new-from-figma/translink-logo.png';
+import compassCardImg from '../../assets/new-from-figma/compass-card.png';
 
 interface HeaderProps {
   timeRangeText: string;
@@ -12,10 +12,10 @@ const Header: React.FC<HeaderProps> = ({ timeRangeText }) => {
       <div className="center-container py-4">
         <div className="width-container flex-center">
           <div className="transition-transform duration-300 hover:scale-105 mr-auto">
-            <img src={translinkLogo} alt="TransLink Logo" className="h-6 sm:h-7" />
+            <img src={translinkLogoImg} alt="TransLink Logo" className="h-8 sm:h-9" />
           </div>
           <div className="flex items-center gap-2.5 bg-gradient-to-r from-translink-blue/10 to-translink-light-blue/30 px-4 py-2 rounded-full transition-all duration-300 hover:shadow-md shadow-sm">
-            <img src={compassCard} alt="Compass Card" className="h-4 w-4" />
+            <img src={compassCardImg} alt="Compass Card" className="h-5 w-auto" />
             <h2 className="text-sm font-semibold text-translink-blue">
               Compass <span className="font-bold bg-gradient-to-r from-translink-blue to-translink-secondary bg-clip-text text-transparent">{timeRangeText}</span> Insights
             </h2>
