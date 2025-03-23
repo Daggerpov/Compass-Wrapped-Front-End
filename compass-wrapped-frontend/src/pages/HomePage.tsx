@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
       <Background />
       
       <main className="flex-1 w-full flex flex-col items-center justify-center py-12 px-4 text-center">
-        <div className="w-full max-w-3xl mx-auto flex flex-col items-center gap-10">
+        <div className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center gap-10">
           <Header />
           
           <FileDropzone />
