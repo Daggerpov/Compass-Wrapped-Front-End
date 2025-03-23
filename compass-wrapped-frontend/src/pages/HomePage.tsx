@@ -63,62 +63,62 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white relative overflow-hidden">
-      {/* Background Elements */}
+      {/* Background Elements - Reduced size and opacity */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-translink-blue/10 to-transparent opacity-60"></div>
+        <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-translink-blue/10 to-transparent opacity-50"></div>
         <img
           src={skyline}
           alt=""
-          className="absolute bottom-0 left-0 w-full max-w-5xl mx-auto bg-image"
+          className="absolute bottom-0 left-0 w-full max-w-2xl mx-auto opacity-5"
         />
         <img
           src={skytrain}
           alt=""
-          className="absolute bottom-20 right-0 w-1/3 max-w-md bg-image animate-pulse transition-opacity duration-10000"
+          className="absolute bottom-20 right-0 w-1/6 max-w-[120px] opacity-10 animate-float"
         />
         <div className="absolute inset-0 bg-gradient-to-tr from-translink-blue/5 to-transparent"></div>
-        <div className="absolute top-20 left-20 w-24 h-24 rounded-full bg-translink-yellow/20 filter blur-xl"></div>
-        <div className="absolute bottom-40 right-20 w-32 h-32 rounded-full bg-translink-secondary/20 filter blur-3xl"></div>
+        <div className="absolute top-20 left-20 w-10 h-10 rounded-full bg-translink-yellow/20 filter blur-lg"></div>
+        <div className="absolute bottom-40 right-20 w-14 h-14 rounded-full bg-translink-secondary/20 filter blur-2xl"></div>
       </div>
 
-      {/* Header */}
-      <header className="header backdrop-blur-md bg-white/80 sticky top-0 z-50 shadow-sm">
-        <div className="container-custom py-3 flex flex-col sm:flex-row justify-between items-center">
-          <div className="mb-3 sm:mb-0 transition-transform duration-300 hover:scale-105">
-            <img src={translinkLogo} alt="TransLink Logo" className="img-logo max-h-8" />
+      {/* Header - Streamlined */}
+      <header className="header backdrop-blur-md bg-white/90 sticky top-0 z-50 shadow-sm">
+        <div className="container-custom py-2 flex flex-col sm:flex-row justify-between items-center">
+          <div className="mb-1 sm:mb-0 transition-transform duration-300 hover:scale-105">
+            <img src={translinkLogo} alt="TransLink Logo" className="h-5 sm:h-6" />
           </div>
-          <div className="flex items-center gap-2 bg-translink-blue/10 px-3 py-1.5 rounded-full transition-all duration-300 hover:bg-translink-blue/15">
-            <img src={compassCard} alt="Compass Card" className="img-icon" />
-            <h2 className="text-lg font-medium text-translink-blue">
+          <div className="flex items-center gap-1.5 bg-translink-blue/10 px-3 py-1 rounded-full transition-all duration-300 hover:bg-translink-blue/15">
+            <img src={compassCard} alt="Compass Card" className="h-3.5 w-3.5" />
+            <h2 className="text-sm font-medium text-translink-blue">
               Compass <span className="font-bold">{getTimeRangeText()}</span> Insights
             </h2>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="container-custom py-12 sm:py-20 relative z-10">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-16 animate-slide-up">
-            <span className="inline-block px-4 py-1.5 bg-translink-blue/10 text-translink-blue font-medium rounded-full mb-4 text-sm">
+      {/* Main Content - More compact */}
+      <main className="container-custom py-8 sm:py-12 relative z-10">
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-8 animate-slide-up">
+            <span className="inline-block px-3 py-1 bg-translink-blue/10 text-translink-blue font-medium rounded-full mb-3 text-xs">
               Your Personal Transit Story
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight">
               Discover Your <span className="text-translink-blue">{getTimeRangeText()}</span> Transit Journey
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base text-gray-600 mb-6 max-w-xl mx-auto leading-relaxed">
               Upload your Compass Card data to see personalized insights about your transit habits and patterns
             </p>
 
-            {/* Time Range Selection */}
-            <div className="flex justify-center gap-3 mb-10">
+            {/* Time Range Selection - More compact */}
+            <div className="flex justify-center gap-2 mb-6">
               {['week', 'month', 'year'].map((range) => (
                 <button
                   key={range}
                   onClick={() => setTimeRange(range)}
-                  className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 transform ${
+                  className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 transform ${
                     timeRange === range
-                      ? 'bg-translink-blue text-white shadow-lg scale-105'
+                      ? 'bg-translink-blue text-white shadow-md scale-105'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:scale-105'
                   }`}
                 >
@@ -128,19 +128,19 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* CSV Instructions */}
-          <div className="mb-12 animate-slide-up transform hover:translate-y-[-5px] transition-transform duration-300" style={{ animationDelay: '0.2s' }}>
+          {/* CSV Instructions - More compact */}
+          <div className="mb-6 animate-slide-up transform hover:translate-y-[-3px] transition-transform duration-300" style={{ animationDelay: '0.2s' }}>
             <CSVInstructions />
           </div>
 
-          {/* Upload Area */}
+          {/* Upload Area - More compact */}
           <div 
             {...getRootProps()} 
-            className={`card p-12 text-center cursor-pointer transition-all duration-300 hover:shadow-xl animate-slide-up ${
+            className={`card p-8 text-center cursor-pointer transition-all duration-300 hover:shadow-lg animate-slide-up ${
               isDragActive 
-                ? 'border-translink-blue border-2 bg-blue-50/70 scale-[1.02]' 
+                ? 'border-translink-blue border-2 bg-blue-50/70 scale-[1.01]' 
                 : isHovering
-                ? 'border-gray-300 bg-blue-50/30 scale-[1.01]'
+                ? 'border-gray-300 bg-blue-50/30 scale-[1.005]'
                 : 'hover:border-gray-300'
             }`}
             style={{ animationDelay: '0.4s' }}
@@ -148,24 +148,24 @@ export default function HomePage() {
             onMouseLeave={() => setIsHovering(false)}
           >
             <input {...getInputProps()} />
-            <div className="mb-6">
-              <div className={`w-24 h-24 mx-auto mb-6 bg-translink-blue/10 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 ${
+            <div className="mb-4">
+              <div className={`w-12 h-12 mx-auto mb-3 bg-translink-blue/10 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 ${
                 isDragActive ? 'scale-110 bg-translink-blue/20' : isHovering ? 'scale-105 bg-translink-blue/15' : ''
               }`}>
-                <img src={compassCard} alt="Upload" className={`w-14 h-14 transition-all duration-300 ${isDragActive ? 'scale-110' : isHovering ? 'scale-105' : ''}`} />
+                <img src={compassCard} alt="Upload" className={`w-7 h-7 transition-all duration-300 ${isDragActive ? 'scale-110' : isHovering ? 'scale-105' : ''}`} />
               </div>
-              <h3 className="text-2xl font-semibold mb-3">
+              <h3 className="text-xl font-semibold mb-2">
                 {isDragActive ? 'Drop your file here' : 'Drop your CSV file here'}
               </h3>
-              <p className="text-gray-600 max-w-md mx-auto">
+              <p className="text-gray-600 text-sm max-w-md mx-auto">
                 {isDragActive 
                   ? 'Release to upload your Compass Card data' 
                   : 'or click to select your Compass Card transaction history'}
               </p>
             </div>
             <div className="flex justify-center">
-              <div className={`flex items-center gap-2 text-sm text-translink-blue font-medium ${isDragActive ? 'opacity-0' : 'opacity-80'}`}>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className={`flex items-center gap-1.5 text-xs text-translink-blue font-medium ${isDragActive ? 'opacity-0' : 'opacity-80'}`}>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
                 <span>Your data remains private and never leaves your device</span>
@@ -174,14 +174,14 @@ export default function HomePage() {
           </div>
 
           {isUploaded && (
-            <div className="mt-10 text-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
+            <div className="mt-8 text-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
               <button
                 onClick={handleContinue}
-                className="btn btn-primary shadow-lg shadow-blue-200/70 hover:shadow-xl hover:shadow-blue-300/60 transform hover:-translate-y-1 transition-all duration-300"
+                className="btn btn-primary shadow-md shadow-blue-200/60 hover:shadow-lg hover:shadow-blue-300/50 transform hover:-translate-y-1 transition-all duration-300"
               >
                 View Your {getTimeRangeText()} Insights
                 <svg
-                  className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
+                  className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -194,23 +194,23 @@ export default function HomePage() {
                   />
                 </svg>
               </button>
-              <p className="mt-4 text-sm text-gray-500">See your transit patterns, favorite routes, and more</p>
+              <p className="mt-3 text-xs text-gray-500">See your transit patterns, favorite routes, and more</p>
             </div>
           )}
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="container-custom py-8 relative z-10 border-t border-gray-100 mt-12">
+      {/* Footer - Streamlined */}
+      <footer className="container-custom py-6 relative z-10 border-t border-gray-100 mt-8">
         <div className="flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm text-gray-500 mb-4 sm:mb-0">© 2024 TransLink. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="text-sm text-gray-500 hover:text-translink-blue transition-colors">Privacy Policy</a>
-            <a href="#" className="text-sm text-gray-500 hover:text-translink-blue transition-colors">Terms of Use</a>
-            <a href="#" className="text-sm text-gray-500 hover:text-translink-blue transition-colors">Contact</a>
+          <p className="text-xs text-gray-500 mb-3 sm:mb-0">© 2024 TransLink. All rights reserved.</p>
+          <div className="flex gap-4">
+            <a href="#" className="text-xs text-gray-500 hover:text-translink-blue transition-colors">Privacy Policy</a>
+            <a href="#" className="text-xs text-gray-500 hover:text-translink-blue transition-colors">Terms of Use</a>
+            <a href="#" className="text-xs text-gray-500 hover:text-translink-blue transition-colors">Contact</a>
           </div>
         </div>
       </footer>
     </div>
   );
-} 
+}

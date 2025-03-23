@@ -13,6 +13,7 @@ import TransferSlide from '../components/slides/TransferSlide';
 import PersonalitySlide from '../components/slides/PersonalitySlide';
 import AchievementsSlide, { Achievement } from '../components/slides/AchievementsSlide';
 import MissingTapSlide from '../components/slides/MissingTapSlide';
+import TripSummarySlide from '../components/slides/TripSummarySlide';
 
 // Define interfaces for data types
 interface StopData {
@@ -62,21 +63,21 @@ const SummaryPage: React.FC = () => {
   
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-translink-blue"></div>
-        <p className="mt-4 text-lg">Analyzing your transit data...</p>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-translink-blue"></div>
+        <p className="mt-3 text-base text-gray-700">Analyzing your transit data...</p>
       </div>
     );
   }
   
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg max-w-md">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg max-w-md shadow-sm">
           <p className="font-bold">Error</p>
-          <p>{error}</p>
+          <p className="text-sm">{error}</p>
           <button 
-            className="mt-4 bg-translink-blue hover:bg-translink-secondary text-white px-4 py-2 rounded"
+            className="mt-3 bg-translink-blue hover:bg-translink-secondary text-white px-3 py-1.5 rounded text-sm transition-colors"
             onClick={() => navigate('/')}
           >
             Try Again
@@ -88,10 +89,10 @@ const SummaryPage: React.FC = () => {
   
   if (!analyticsData) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <p className="text-lg">No data available. Please upload your CSV file.</p>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+        <p className="text-base text-gray-700">No data available. Please upload your CSV file.</p>
         <button 
-          className="mt-4 bg-translink-blue hover:bg-translink-secondary text-white px-4 py-2 rounded"
+          className="mt-3 bg-translink-blue hover:bg-translink-secondary text-white px-3 py-1.5 rounded text-sm transition-colors"
           onClick={() => navigate('/')}
         >
           Go to Upload
@@ -115,107 +116,148 @@ const SummaryPage: React.FC = () => {
   const totalMissingTaps = missingTapIns + missingTapOuts;
   
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="text-center pt-8 pb-4 bg-white">
-        <h1 className="text-4xl font-bold text-translink-blue">Your Compass Wrapped</h1>
-        <p className="text-xl text-gray-600 mt-2">Here's your transit year in review</p>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* Header - More compact and modern */}
+      <div className="py-4 bg-white shadow-sm sticky top-0 z-20">
+        <div className="container-custom">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-bold text-translink-blue">Your Compass Wrapped</h1>
+            <div className="flex items-center gap-2">
+              <button 
+                className="text-xs text-gray-600 hover:text-translink-blue px-2 py-1 rounded transition-colors"
+                onClick={() => navigate('/')}
+              >
+                Upload New Data
+              </button>
+              <button 
+                className="bg-translink-blue hover:bg-translink-secondary text-white text-xs px-3 py-1.5 rounded-md transition-colors flex items-center gap-1"
+                onClick={() => navigate('/share')}
+              >
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                Share
+              </button>
+            </div>
+          </div>
+          <p className="text-sm text-gray-600 mt-1">Your transit journey in review</p>
+        </div>
       </div>
       
-      <div className="h-[calc(100vh-10rem)] w-full">
-        <Slideshow
-          activeIndex={activeSlideIndex}
-          onChange={setActiveSlideIndex}
-          showDots={true}
-          showArrows={true}
-          autoPlay={false}
-        >
-          {/* Slide 1: Total Trips */}
-          <TotalTripsSlide totalTrips={totalTrips} />
-          
-          {/* Slide 2: Most Traveled Routes */}
-          {mostUsedStop && (
-            <MostTraveledRouteSlide mostUsedStop={mostUsedStop} />
-          )}
-          
-          {/* Slide 3: Time Spent */}
-          <TimeSpentSlide totalHours={totalHours} />
-          
-          {/* Slide 4: Transfers */}
-          {mostCommonTransfer && (
-            <TransferSlide transfer={mostCommonTransfer} />
-          )}
-          
-          {/* Slide 5: Personality */}
-          <PersonalitySlide 
-            personalityType={personalityType} 
-            commonTime={commonTime} 
-            details={personalityDetails} 
-          />
-          
-          {/* Slide 6: Achievements */}
-          <AchievementsSlide 
-            achievements={achievementsData.length > 0 ? achievementsData : [
-              {
-                id: '1',
-                title: 'Transit Explorer',
-                description: 'Tried 5+ different routes',
-                icon: 'explorer',
-                unlocked: true
-              },
-              {
-                id: '2',
-                title: 'Early Bird',
-                description: 'Regularly catch the first train',
-                icon: 'early_bird',
-                unlocked: uniqueRoutes > 3
-              },
-              {
-                id: '3',
-                title: 'Distance Champion',
-                description: 'Traveled over 1000km on transit',
-                icon: 'distance',
-                unlocked: totalTrips > 100
-              },
-              {
-                id: '4',
-                title: 'Weekend Warrior',
-                description: 'Used transit on 10+ weekends',
-                icon: 'weekend',
-                unlocked: false
-              }
-            ]}
-            totalTrips={totalTrips}
-          />
-          
-          {/* Slide 7: Missing Taps */}
-          <MissingTapSlide 
-            missingTapCount={totalMissingTaps} 
-            totalTrips={totalTrips} 
-          />
-        </Slideshow>
+      {/* Slideshow Container - Improved layout */}
+      <div className="flex-grow flex flex-col">
+        <div className="container-custom py-4 flex-grow">
+          <div className="bg-white rounded-xl shadow-sm overflow-hidden h-[calc(100vh-12rem)] max-h-[800px]">
+            <Slideshow
+              activeIndex={activeSlideIndex}
+              onChange={setActiveSlideIndex}
+              showDots={true}
+              showArrows={true}
+              autoPlay={false}
+            >
+              {/* Slide 1: Total Trips */}
+              <TotalTripsSlide totalTrips={totalTrips} />
+              
+              {/* Slide 2: Most Traveled Routes */}
+              {mostUsedStop && (
+                <MostTraveledRouteSlide mostUsedStop={mostUsedStop} />
+              )}
+              
+              {/* Slide 3: Time Spent */}
+              <TimeSpentSlide totalHours={totalHours} />
+              
+              {/* Slide 4: Transfers */}
+              {mostCommonTransfer && (
+                <TransferSlide transfer={mostCommonTransfer} />
+              )}
+              
+              {/* Slide 5: Personality */}
+              <PersonalitySlide 
+                personalityType={personalityType} 
+                commonTime={commonTime} 
+                details={personalityDetails} 
+              />
+              
+              {/* Slide 6: Achievements */}
+              <AchievementsSlide 
+                achievements={achievementsData.length > 0 ? achievementsData : [
+                  {
+                    id: '1',
+                    title: 'Transit Explorer',
+                    description: 'Tried 5+ different routes',
+                    icon: 'explorer',
+                    unlocked: true
+                  },
+                  {
+                    id: '2',
+                    title: 'Early Bird',
+                    description: 'Regularly catch the first train',
+                    icon: 'early_bird',
+                    unlocked: uniqueRoutes > 3
+                  },
+                  {
+                    id: '3',
+                    title: 'Distance Champion',
+                    description: 'Traveled over 1000km on transit',
+                    icon: 'distance',
+                    unlocked: totalTrips > 100
+                  },
+                  {
+                    id: '4',
+                    title: 'Weekend Warrior',
+                    description: 'Used transit on 10+ weekends',
+                    icon: 'weekend',
+                    unlocked: false
+                  }
+                ]}
+                totalTrips={totalTrips}
+              />
+              
+              {/* Slide 7: Missing Taps */}
+              <MissingTapSlide 
+                missingTapCount={totalMissingTaps} 
+                totalTrips={totalTrips} 
+              />
+
+              {/* Slide 8: Trip Summary */}
+              <TripSummarySlide 
+                totalTrips={totalTrips}
+                uniqueRoutes={uniqueRoutes}
+                totalHours={totalHours}
+              />
+            </Slideshow>
+          </div>
+        </div>
       </div>
       
-      <div className="fixed bottom-0 left-0 right-0 bg-white py-4 shadow-md z-10">
-        <div className="flex justify-center space-x-4">
-          <button 
-            className="bg-translink-blue hover:bg-translink-secondary text-white px-6 py-3 rounded-lg text-lg font-semibold transition-colors flex items-center"
-            onClick={() => navigate('/share')}
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-            </svg>
-            Create Shareable Image
-          </button>
-          <button 
-            className="bg-white hover:bg-gray-100 text-translink-blue border border-translink-blue px-6 py-3 rounded-lg text-lg font-semibold transition-colors"
-            onClick={() => navigate('/')}
-          >
-            Upload New Data
-          </button>
+      {/* Navigation Footer - More compact and modern */}
+      <div className="bg-white py-3 shadow-md z-10 border-t border-gray-100">
+        <div className="container-custom flex justify-between items-center">
+          <div className="text-xs text-gray-500">
+            Slide {activeSlideIndex + 1} of 8
+          </div>
+          
+          <div className="flex gap-3">
+            <button 
+              className="bg-white hover:bg-gray-50 text-translink-blue border border-translink-blue px-3 py-1.5 rounded-md text-sm font-medium transition-colors"
+              onClick={() => navigate('/')}
+            >
+              Upload New Data
+            </button>
+            <button 
+              className="bg-translink-blue hover:bg-translink-secondary text-white px-4 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5"
+              onClick={() => navigate('/share')}
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+              </svg>
+              Create Shareable Image
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default SummaryPage; 
+export default SummaryPage;
