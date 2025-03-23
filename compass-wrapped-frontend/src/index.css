@@ -19,47 +19,64 @@ body {
 
 /* Image size constraints */
 .img-icon {
-  width: 24px;
+  width: 20px;
   height: auto;
+  @apply sm:w-5;
 }
 
 .img-logo {
-  width: 120px;
+  width: 100px;
   height: auto;
-  @apply sm:w-32;
+  @apply sm:w-28;
 }
 
 .img-card {
-  width: 180px;
+  width: 140px;
   height: auto;
-  @apply sm:w-200;
+  @apply sm:w-160;
 }
 
 .img-hero {
   width: 100%;
-  max-width: 300px;
+  max-width: 240px;
   height: auto;
   opacity: 0.9;
+}
+
+/* Background images */
+.bg-image {
+  @apply max-w-full;
+  object-fit: contain;
+  opacity: 0.1;
 }
 
 /* Card styles */
 .card {
   @apply bg-white rounded-xl shadow-sm border border-gray-100;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   @apply shadow-md;
 }
 
 /* Button styles */
 .btn {
-  @apply px-6 py-3 rounded-full font-medium transition-all duration-200 inline-flex items-center justify-center;
+  @apply px-6 py-3 rounded-full font-medium transition-all duration-300 inline-flex items-center justify-center gap-2;
 }
 
 .btn-primary {
-  @apply bg-translink-blue text-white hover:bg-translink-secondary;
+  @apply bg-translink-blue text-white hover:bg-translink-secondary relative overflow-hidden;
+  background-size: 200% auto;
+  background-image: linear-gradient(to right, var(--translink-blue) 0%, var(--translink-secondary) 50%, var(--translink-blue) 100%);
+  transition: 0.5s;
+}
+
+.btn-primary:hover {
+  background-position: right center;
 }
 
 .btn-outline {
@@ -74,6 +91,7 @@ body {
 /* Header */
 .header {
   @apply bg-white shadow-sm sticky top-0 z-50;
+  backdrop-filter: blur(8px);
 }
 
 /* Carousel styles */
@@ -109,8 +127,21 @@ body {
   }
 }
 
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 .animate-slide-up {
-  animation: slideUp 0.5s ease forwards;
+  animation: slideUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.animate-slide-right {
+  animation: slideRight 15s linear infinite;
 }
 
 /* Typography */
@@ -158,4 +189,60 @@ h2 {
 @keyframes fadeInOut {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, #f6f7f8 8%, #edeef1 18%, #f6f7f8 33%);
+  background-size: 1000px 100%;
+}
+
+/* Hover underline animation */
+.hover-underline-animation {
+  position: relative;
+}
+
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--translink-blue);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Dot pulse animation */
+@keyframes dotPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 102, 179, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 102, 179, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 102, 179, 0);
+  }
+}
+
+.dot-pulse {
+  animation: dotPulse 1.5s infinite;
 }
