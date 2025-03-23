@@ -118,7 +118,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
   }, [currentSlide]);
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout;
+    let intervalId: number;
 
     if (autoPlay) {
       intervalId = setInterval(() => {
@@ -166,23 +166,19 @@ const Slideshow: React.FC<SlideshowProps> = ({
       {showArrows && (
         <>
           <button 
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md z-10 text-translink-blue hover:bg-opacity-100 transition-all focus:outline-none md:flex hidden items-center justify-center"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-1 shadow-sm z-10 text-translink-blue hover:bg-opacity-90 transition-all focus:outline-none md:flex hidden items-center justify-center"
             onClick={prevSlide}
             disabled={currentSlide === 0 && !autoPlay}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+            &lt;
           </button>
           
           <button 
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md z-10 text-translink-blue hover:bg-opacity-100 transition-all focus:outline-none md:flex hidden items-center justify-center"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-1 shadow-sm z-10 text-translink-blue hover:bg-opacity-90 transition-all focus:outline-none md:flex hidden items-center justify-center"
             onClick={nextSlide}
             disabled={currentSlide === totalSlides - 1 && !autoPlay}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            &gt;
           </button>
         </>
       )}
@@ -194,8 +190,8 @@ const Slideshow: React.FC<SlideshowProps> = ({
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`h-2 w-2 rounded-full transition-all ${
-                currentSlide === index ? 'bg-translink-blue w-4' : 'bg-gray-300'
+              className={`h-1.5 w-1.5 rounded-full transition-all ${
+                currentSlide === index ? 'bg-translink-blue w-3' : 'bg-gray-300'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -207,4 +203,4 @@ const Slideshow: React.FC<SlideshowProps> = ({
 };
 
 export default Slideshow;
-export { Slide }; 
+export { Slide };

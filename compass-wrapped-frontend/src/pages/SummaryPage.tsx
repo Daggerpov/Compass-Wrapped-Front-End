@@ -115,7 +115,6 @@ export default function SummaryPage() {
             })}
           </div>
 
-          {/* Navigation Dots */}
           <div className="carousel-nav">
             {slides.map((slide, index) => (
               <button
@@ -128,16 +127,12 @@ export default function SummaryPage() {
           </div>
         </div>
 
-        {/* Navigation Buttons */}
         <div className="flex justify-between mt-8">
           <button
             onClick={prevSlide}
             className={`btn ${activeIndex === 0 ? 'btn-outline opacity-50' : 'btn-outline'}`}
             disabled={activeIndex === 0}
           >
-            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
             Previous
           </button>
           <button
@@ -146,13 +141,9 @@ export default function SummaryPage() {
             disabled={activeIndex === slides.length - 1}
           >
             Next
-            <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
           </button>
         </div>
 
-        {/* Swipe Instructions */}
         <div className="swipe-instruction">
           Swipe or use arrow keys to navigate
         </div>
