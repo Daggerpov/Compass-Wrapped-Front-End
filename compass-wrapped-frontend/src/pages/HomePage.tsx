@@ -11,11 +11,11 @@ import {
   TimeRangeSelector, 
   FileDropzone, 
   Footer,
-  IconsSection
+  IconsSection 
 } from '../components/HomePage';
 
 export default function HomePage() {
-  const { setFile, setAnalyticsData, setLoading, setError } = useContext(DataContext);
+  const { setFile, setAnalyticsData, setLoading, setError, loading, error } = useContext(DataContext);
   const [isUploaded, setIsUploaded] = useState(false);
   const [timeRange, setTimeRange] = useState('month');
   const [isHovering, setIsHovering] = useState(false);
@@ -26,15 +26,21 @@ export default function HomePage() {
       const file = acceptedFiles[0];
       setLoading(true);
       setError(null);
+      setIsUploaded(false);  // Reset upload state while processing
       
       try {
         const response = await getAllAnalytics(file);
-        setAnalyticsData(response.data);
-        setFile(file);
-        setIsUploaded(true);
-      } catch (error) {
-        setError('Error processing file. Please try again.');
+        if (response && response.data) {
+          setAnalyticsData(response.data);
+          setFile(file);
+          setIsUploaded(true);
+        } else {
+          throw new Error('No data received from the server');
+        }
+      } catch (error: any) {
         console.error('Error:', error);
+        setError(error.message || 'Error processing file. Please try again.');
+        setIsUploaded(false);
       } finally {
         setLoading(false);
       }
@@ -91,6 +97,8 @@ export default function HomePage() {
             isHovering={isHovering}
             setIsHovering={setIsHovering}
             isUploaded={isUploaded}
+            isLoading={loading}
+            error={error}
             handleContinue={handleContinue}
             getTimeRangeText={getTimeRangeText}
           />
