@@ -14,28 +14,27 @@ const NavigationControls: React.FC<NavigationControlsProps> = ({
   prevSlide
 }) => {
   return (
-    <>
-      <div className="flex justify-between mt-8">
-        <button
-          onClick={prevSlide}
-          className={`btn ${activeIndex === 0 ? 'btn-outline opacity-50' : 'btn-outline'}`}
-          disabled={activeIndex === 0}
-        >
-          Previous
-        </button>
-        <button
-          onClick={nextSlide}
-          className={`btn ${activeIndex === totalSlides - 1 ? 'btn-outline opacity-50' : 'btn-primary'}`}
-          disabled={activeIndex === totalSlides - 1}
-        >
-          Next
-        </button>
+    <div className="flex justify-between items-center mt-0">
+      <button
+        onClick={prevSlide}
+        disabled={activeIndex === 0}
+        className="px-3 py-1 rounded-md bg-translink-blue text-white disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Previous
+      </button>
+
+      <div className="text-sm text-gray-500">
+        {activeIndex + 1} / {totalSlides}
       </div>
 
-      <div className="swipe-instruction">
-        Swipe or use arrow keys to navigate
-      </div>
-    </>
+      <button
+        onClick={nextSlide}
+        disabled={activeIndex === totalSlides - 1}
+        className="px-3 py-1 rounded-md bg-translink-blue text-white disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Next
+      </button>
+    </div>
   );
 };
 

@@ -15,7 +15,7 @@ const CollapsibleContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CollapsiblePrimitive.Content
     ref={ref}
-    className={className}
+    className={cn(className)}
     {...props}
   />
 ))

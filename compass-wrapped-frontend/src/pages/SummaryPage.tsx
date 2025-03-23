@@ -104,7 +104,7 @@ export default function SummaryPage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      <div className="container-custom py-2">
+      <div className="container-custom py-0">
         <SlideCarousel 
           slides={slides}
           activeIndex={activeIndex}

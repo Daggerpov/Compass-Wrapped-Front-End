@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Ensure proper widths for containers */
 .full-width {
@@ -144,7 +142,7 @@ body {
 
 /* Container */
 .container-custom {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply max-w-7xl mx-auto px-0;
 }
 
 /* Header */
@@ -163,7 +161,7 @@ body {
 }
 
 .carousel-nav {
-  @apply absolute bottom-4 left-0 right-0 flex justify-center gap-2;
+  @apply absolute bottom-2 left-0 right-0 flex justify-center gap-2;
 }
 
 .carousel-dot {
