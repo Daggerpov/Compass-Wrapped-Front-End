@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
 import { processCSV } from '../api';
+import { AnalyticsData, UserStatsResponse } from '../types';
 
 export const useData = () => {
   const context = useContext(DataContext);
@@ -16,16 +17,18 @@ export const useData = () => {
       context.setFile(file);
       
       // Call the API to process the CSV
-      const result = await processCSV(file);
+      const result: UserStatsResponse = await processCSV(file);
       
-      if (result.success) {
+      if (result.success && result.data) {
         context.setAnalyticsData(result.data);
         return true;
       } else {
+        context.setAnalyticsData(null);
         context.setError(result.error || 'Failed to process CSV');
         return false;
       }
     } catch (error) {
+      context.setAnalyticsData(null);
       context.setError('An error occurred while processing the CSV');
       console.error(error);
       return false;

@@ -1,14 +1,7 @@
+// First, install axios types if not already installed
+// npm install --save-dev @types/axios
+
 import axios from 'axios';
-
-const API_URL = 'https://compass-wrapped-back-end.up.railway.app';
-
-// Create an axios instance with default config
-const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  }
-});
 
 export interface ApiResponse<T> {
   success: boolean;
@@ -61,6 +54,43 @@ interface UserStatsResponse {
   personality: TransitPersonality;
   comparison: ComparisonStats;
 }
+
+interface AnalyticsData {
+  total_stats: {
+    total_trips: number;
+    unique_routes: number;
+  };
+  route_stats: {
+    most_used_stops: {
+      stop_id: string;
+      stop_name: string;
+      count: number;
+    }[];
+  };
+  time_stats: {
+    total_commute_hours: number;
+  };
+  personality: {
+    personality_type: string;
+    details: string;
+  };
+  achievements: {
+    achievements: {
+      title: string;
+      description: string;
+    }[];
+  };
+}
+
+const API_URL = 'https://compass-wrapped-back-end.up.railway.app';
+
+// Create an axios instance with default config
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+});
 
 const parseDateTime = (dateTimeStr: string, timeStr: string): Date => {
   // Convert "Mar-22-2025 08:50 AM" to "2025-03-22T08:50:00"
@@ -251,15 +281,55 @@ const parseCSV = async (file: File): Promise<UserStats> => {
   });
 };
 
-export const processCSV = async (file: File): Promise<ApiResponse<UserStatsResponse>> => {
+const transformToAnalyticsData = (response: UserStatsResponse): AnalyticsData => {
+  const { stats, personality, comparison } = response;
+  
+  return {
+    total_stats: {
+      total_trips: stats.total_trips,
+      unique_routes: stats.top_routes.length
+    },
+    route_stats: {
+      most_used_stops: stats.top_stops.map(stop => ({
+        stop_id: stop.stop_name,  // Using stop_name as ID since that's what we have
+        stop_name: stop.stop_name,
+        count: stop.count
+      }))
+    },
+    time_stats: {
+      total_commute_hours: stats.total_hours
+    },
+    personality: {
+      personality_type: personality.type,
+      details: personality.description
+    },
+    achievements: {
+      achievements: [
+        {
+          title: personality.type,
+          description: personality.description
+        }
+      ]
+    }
+  };
+};
+
+export const processCSV = async (file: File): Promise<ApiResponse<AnalyticsData>> => {
   try {
     const stats = await parseCSV(file);
     
     try {
-      const response = await api.post('/stats/user', stats);
+      const response = await api.post<UserStatsResponse>('/stats/user', stats);
+      if (!response.data) {
+        return {
+          success: false,
+          error: 'No data received from server'
+        };
+      }
+      const analyticsData = transformToAnalyticsData(response.data);
       return {
         success: true,
-        data: response.data as UserStatsResponse
+        data: analyticsData
       };
     } catch (error: any) {
       console.error('API Error:', error);
@@ -275,6 +345,4 @@ export const processCSV = async (file: File): Promise<ApiResponse<UserStatsRespo
       error: error.message || 'Failed to process the CSV file. Please try again.'
     };
   }
-};
-
- 
+}; 

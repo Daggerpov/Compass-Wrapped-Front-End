@@ -1,92 +1,133 @@
-import { motion } from 'framer-motion';
-import skytrain from '../../assets/new-from-figma/skytrain-facing-right.png';
+import React, { useEffect, useRef } from 'react';
+import skytrainImg from '../../assets/new-from-figma/skytrain-facing-right.png';
 
 interface TimeSpentSlideProps {
   hoursSpent?: number;
   transit?: string;
 }
 
-const TimeSpentSlide: React.FC<TimeSpentSlideProps> = ({
-  hoursSpent = 134,
-  transit = "SkyTrain"
+const TimeSpentSlide: React.FC<TimeSpentSlideProps> = ({ 
+  hoursSpent = 194, 
+  transit = "SkyTrain" 
 }) => {
-  const daysSpent = (hoursSpent / 24).toFixed(1);
-
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+  // These values are unused in the component but kept for reference
+  // const days = Math.floor(totalHours / 24);
+  // const hours = Math.round(totalHours % 24);
+  
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    // Set canvas dimensions
+    canvas.width = 200;
+    canvas.height = 200;
+    
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 80;
+    
+    // Animation function
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw outer circle
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.lineWidth = 8;
+      ctx.stroke();
+      
+      // Draw hour ticks
+      for (let i = 0; i < 12; i++) {
+        const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
+        const x1 = centerX + (radius - 10) * Math.cos(angle);
+        const y1 = centerY + (radius - 10) * Math.sin(angle);
+        const x2 = centerX + radius * Math.cos(angle);
+        const y2 = centerY + radius * Math.sin(angle);
+        
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+      
+      // Calculate position for hour hand
+      const date = new Date();
+      const hour = date.getHours() % 12;
+      const minute = date.getMinutes();
+      const hourAngle = ((hour + minute / 60) / 12) * 2 * Math.PI - Math.PI / 2;
+      
+      // Draw hour hand
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(
+        centerX + radius * 0.6 * Math.cos(hourAngle),
+        centerY + radius * 0.6 * Math.sin(hourAngle)
+      );
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 4;
+      ctx.stroke();
+      
+      // Calculate position for minute hand
+      const minuteAngle = (minute / 60) * 2 * Math.PI - Math.PI / 2;
+      
+      // Draw minute hand
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(
+        centerX + radius * 0.8 * Math.cos(minuteAngle),
+        centerY + radius * 0.8 * Math.sin(minuteAngle)
+      );
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      // Draw center circle
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 5, 0, 2 * Math.PI);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+      
+      requestAnimationFrame(animate);
+    };
+    
+    animate();
+  }, []);
+  
   return (
-    <div className="h-screen w-screen bg-translink-blue text-white relative overflow-hidden">
-      {/* Wave pattern using CSS gradient instead of SVG */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ duration: 1 }}
-        className="absolute top-0 left-0 right-0 w-full h-32"
-        style={{
-          background: `linear-gradient(135deg, rgba(76, 175, 80, 0.3) 0%, rgba(129, 199, 132, 0.3) 50%, rgba(76, 175, 80, 0.3) 100%)`,
-          maskImage: 'linear-gradient(to bottom, black, transparent)'
-        }}
-      />
-
-      <div className="relative z-10 flex flex-col items-center justify-between h-full px-8 py-16">
-        <div className="flex flex-col items-center space-y-4 mt-12">
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-3xl font-bold text-center"
-          >
-            You've spent {hoursSpent} hours on
-          </motion.h2>
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl font-bold text-center"
-          >
-            {transit} this year!
-          </motion.h2>
-        </div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="text-2xl text-center"
-        >
-          That's {daysSpent} days of travel!
-        </motion.p>
-
-        {/* SkyTrain illustration */}
-        <motion.div
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ 
-            delay: 0.6, 
-            type: "spring", 
-            stiffness: 50,
-            damping: 20
-          }}
-          className="relative w-full max-w-2xl h-48 mb-8"
-        >
-          {/* Track */}
-          <div className="absolute bottom-0 left-0 right-0 h-2 bg-gray-600"></div>
+    <div className="width-container">
+      <div 
+        className={`border-2 border-dashed rounded-xl p-3 flex-col-center`}>
+        <div className="w-full h-full flex flex-col items-center justify-between bg-translink-blue text-white px-4 py-6">
+          <div className="text-center">
+            <p className="text-lg">You've spent</p>
+            <p className="text-3xl font-bold mb-1">{hoursSpent} hours</p>
+            <p className="text-lg">on <span className="font-bold">{transit}</span> this year!</p>
+          </div>
           
-          {/* Train */}
-          <motion.img
-            src={skytrain}
-            alt="SkyTrain"
-            className="absolute bottom-2 left-1/2 -translate-x-1/2 h-40 w-auto"
-            animate={{
-              x: [-10, 10],
-              y: [-2, 2]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }}
-          />
-        </motion.div>
+          <div className="my-4">
+            <img
+              src={skytrainImg}
+              alt="SkyTrain"
+              className="h-24 w-auto"
+            />
+          </div>
+          
+          <div className="mt-auto text-sm opacity-80 text-center">
+            <p>That's {Math.round(hoursSpent * 60 / 20)} 20-minute episodes of your favorite show!</p>
+            
+            <div className="flex justify-center items-center mt-2">
+              <canvas ref={canvasRef} width="80" height="80" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,138 +1,62 @@
 // No need to import React explicitly
-import { motion } from 'framer-motion';
 
 interface TripSummaryProps {
   totalTrips?: number;
   totalHours?: number;
   uniqueRoutes?: number;
   favoriteLine?: string;
-  mostActiveDay?: string;
-  mostCommonTime?: string;
 }
 
 const TripSummarySlide: React.FC<TripSummaryProps> = ({
   totalTrips = 325,
   totalHours = 184,
   uniqueRoutes = 28,
-  favoriteLine = "99 B-Line",
-  mostActiveDay = "Wednesday",
-  mostCommonTime = "8:15 AM"
+  favoriteLine = "99 B-Line"
 }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-translink-blue via-blue-700 to-blue-900 text-white p-6">
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="max-w-2xl mx-auto pt-12"
-      >
-        <motion.h2 
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-4xl font-bold tracking-wide text-center mb-12"
-        >
-          Your Transit Journey
-        </motion.h2>
+    <div className="width-container">
+      <div 
+        className={`border-2 border-dashed rounded-xl p-6 flex-col-center`}>
+        <div className="w-full h-full flex flex-col items-center justify-center bg-blue-50 px-6 py-10">
+          <div className="max-w-md w-full">
+            <h2 className="text-2xl font-bold text-translink-blue text-center mb-6">Your Transit Journey</h2>
             
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="grid grid-cols-2 gap-6 mb-8"
-        >
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center"
-          >
-            <motion.p 
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-white mb-2"
-            >
-              {totalTrips}
-            </motion.p>
-            <p className="text-blue-200">Total Trips</p>
-          </motion.div>
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="bg-white rounded-lg shadow-md p-5 text-center">
+                <p className="text-3xl font-bold text-translink-blue">{totalTrips}</p>
+                <p className="text-sm text-gray-600">Total Trips</p>
+              </div>
               
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center"
-          >
-            <motion.p 
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.9 }}
-              className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-white mb-2"
-            >
-              {totalHours}
-            </motion.p>
-            <p className="text-blue-200">Hours on Transit</p>
-          </motion.div>
+              <div className="bg-white rounded-lg shadow-md p-5 text-center">
+                <p className="text-3xl font-bold text-translink-blue">{totalHours}</p>
+                <p className="text-sm text-gray-600">Hours on Transit</p>
+              </div>
               
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.9 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center"
-          >
-            <motion.p 
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 1.0 }}
-              className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-white mb-2"
-            >
-              {uniqueRoutes}
-            </motion.p>
-            <p className="text-blue-200">Unique Routes</p>
-          </motion.div>
+              <div className="bg-white rounded-lg shadow-md p-5 text-center">
+                <p className="text-3xl font-bold text-translink-blue">{uniqueRoutes}</p>
+                <p className="text-sm text-gray-600">Unique Routes</p>
+              </div>
               
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 1.0 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center"
-          >
-            <motion.p 
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 1.1 }}
-              className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-white mb-2"
-            >
-              {favoriteLine}
-            </motion.p>
-            <p className="text-blue-200">Favorite Line</p>
-          </motion.div>
-        </motion.div>
+              <div className="bg-white rounded-lg shadow-md p-5 text-center">
+                <p className="text-md font-bold text-translink-blue">{favoriteLine}</p>
+                <p className="text-sm text-gray-600">Favorite Line</p>
+              </div>
+            </div>
             
-        <motion.div 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="bg-white/10 backdrop-blur-sm rounded-xl p-8"
-        >
-          <h3 className="text-2xl font-bold text-blue-200 mb-4">Your Transit Profile</h3>
-          <p className="text-lg text-blue-100 mb-6">
-            You're a <span className="font-medium text-white">Regular Commuter</span>, primarily traveling during weekday rush hours.
-            Most of your trips are between home and work or school.
-          </p>
-          <div className="space-y-3 text-blue-200">
-            <p className="flex justify-between">
-              <span>Most active day:</span>
-              <span className="font-medium text-white">{mostActiveDay}</span>
-            </p>
-            <p className="flex justify-between">
-              <span>Most common time:</span>
-              <span className="font-medium text-white">{mostCommonTime}</span>
-            </p>
+            <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+              <h3 className="text-lg font-bold text-translink-blue mb-3">Your Transit Profile</h3>
+              <p className="text-gray-700">
+                You're a <span className="font-medium">Regular Commuter</span>, primarily traveling during weekday rush hours.
+                Most of your trips are between home and work or school.
+              </p>
+              <div className="mt-4 text-sm text-gray-600">
+                <p>Most active day: <span className="font-medium text-gray-800">Wednesday</span></p>
+                <p>Most common time: <span className="font-medium text-gray-800">8:15 AM</span></p>
+              </div>
+            </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 };
