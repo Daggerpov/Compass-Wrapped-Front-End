@@ -8,7 +8,7 @@ const Footer = () => {
         <Card className="border-0 bg-transparent shadow-none w-full max-w-3xl">
           <CardContent className="flex flex-col sm:flex-row sm:justify-between items-center p-0">
             <div className="mb-4 sm:mb-0 text-center">
-              <p className="text-sm text-gray-600 mb-1">© 2024 TransLink. All rights reserved.</p>
+              <p className="text-sm text-gray-600 mb-1">© 2025 Daniel Agapov. All rights reserved.</p>
               <p className="text-xs text-gray-500">Your transit journey, visualized.</p>
             </div>
             <div className="flex items-center justify-center gap-7">

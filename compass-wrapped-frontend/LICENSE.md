@@ -32,4 +32,4 @@ When sharing this work, you must:
 3. Indicate if any changes were made
 4. Retain these attribution requirements in all copies
 
-Copyright (c) 2024 Compass Wrapped 
+Copyright (c) 2025 Daniel Agapov
