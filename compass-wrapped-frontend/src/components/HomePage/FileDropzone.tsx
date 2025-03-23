@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, CardContent } from "../../components/ui/card";
-import { Button } from "../../components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import compassCardImg from '../../assets/new-from-figma/compass-card.png';
 import compassCardTapImg from '../../assets/new-from-figma/compass-card-tap.png';
-import { cn } from '../../lib/utils';
+import { cn } from '@/lib/utils';
 
 interface FileDropzoneProps {
   getRootProps?: any;
