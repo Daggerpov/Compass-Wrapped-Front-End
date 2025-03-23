@@ -15,7 +15,6 @@ const HomePage: React.FC = () => {
 
   // Animation effects when component mounts
   useEffect(() => {
-    // Animate train
     setTimeout(() => {
       setAnimateTrain(true);
     }, 500);
