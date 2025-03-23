@@ -9,7 +9,7 @@ export const useData = () => {
     throw new Error('useData must be used within a DataProvider');
   }
   
-  const processCSVData = async (file: File) => {
+  const uploadCSV = async (file: File) => {
     try {
       context.setLoading(true);
       context.setError(null);
@@ -20,15 +20,13 @@ export const useData = () => {
       
       if (result.success) {
         context.setAnalyticsData(result.data);
-        return true;
       } else {
-        context.setError(result.error || 'Failed to process CSV');
-        return false;
+        throw new Error(result.error || 'Failed to process CSV');
       }
     } catch (error) {
-      context.setError('An error occurred while processing the CSV');
-      console.error(error);
-      return false;
+      throw error instanceof Error 
+        ? error 
+        : new Error('An error occurred while processing the CSV');
     } finally {
       context.setLoading(false);
     }
@@ -36,6 +34,6 @@ export const useData = () => {
   
   return {
     ...context,
-    processCSVData,
+    uploadCSV,
   };
 }; 

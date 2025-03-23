@@ -3,13 +3,14 @@ import compassCardImg from '../assets/new-from-figma/compass-card.png';
 import { Button } from './ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useData } from '../hooks/useData';
+import { useToast } from './ui/use-toast';
 
 const FileDropzone: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const { processCSVData } = useData();
+  const { uploadCSV } = useData();
+  const { toast } = useToast();
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -36,24 +37,29 @@ const FileDropzone: React.FC = () => {
   };
 
   const handleFile = async (file: File) => {
-    setError(null);
+    if (!file.name.toLowerCase().endsWith('.csv')) {
+      toast({
+        title: "Error",
+        description: "Please upload a CSV file.",
+        variant: "destructive",
+      });
+      return;
+    }
     
     try {
-      if (file.type !== 'text/csv') {
-        setError('Please upload a CSV file.');
-        return;
-      }
-      
-      const success = await processCSVData(file);
-      
-      if (success) {
-        navigate('/summary');
-      } else {
-        setError('There was a problem processing your CSV file. Please try again.');
-      }
-    } catch (err) {
-      setError('An error occurred while processing your file. Please try again.');
-      console.error(err);
+      await uploadCSV(file);
+      toast({
+        title: "Success",
+        description: "Your CSV file has been processed successfully!",
+      });
+      navigate('/summary');
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "An error occurred while processing your file.",
+        variant: "destructive",
+      });
+      console.error(error);
     }
   };
 
@@ -91,12 +97,6 @@ const FileDropzone: React.FC = () => {
           className="hidden"
           accept=".csv"
         />
-
-        {error && (
-          <div className="text-red-500 mt-2 text-center">
-            {error}
-          </div>
-        )}
       </div>
 
       <div className="mt-6 flex-center">
