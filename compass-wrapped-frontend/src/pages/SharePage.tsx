@@ -45,11 +45,11 @@ const SharePage: React.FC = () => {
       {/* Header */}
       <header className="relative z-10 pt-6 pb-4 px-6 bg-white shadow-sm">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
-          <div className="w-48 mb-4 sm:mb-0">
+          <div className="w-24 mb-4 sm:mb-0">
             <img src={translinkLogo} alt="TransLink Logo" className="w-full" />
           </div>
           <div className="flex items-center gap-3">
-            <img src={compassCard} alt="Compass Card" className="h-10 w-auto" />
+            <img src={compassCard} alt="Compass Card" className="h-6 w-auto" />
             <h2 className="text-xl font-medium text-translink-blue">Compass Wrapped 2023</h2>
           </div>
         </div>

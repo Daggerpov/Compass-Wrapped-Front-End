@@ -1,46 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120">
-  <!-- Track -->
-  <line x1="10" y1="100" x2="230" y2="100" stroke="#333" stroke-width="6" />
-  <line x1="10" y1="100" x2="230" y2="100" stroke="#666" stroke-width="4" />
+<svg width="150" height="50" viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Track lines -->
+  <line x1="0" y1="45" x2="150" y2="45" stroke="#555555" stroke-width="2"/>
+  <line x1="0" y1="48" x2="150" y2="48" stroke="#555555" stroke-width="2"/>
   
   <!-- Train body -->
-  <rect x="40" y="50" width="160" height="40" rx="10" fill="#0066B3" />
-  <rect x="45" y="55" width="150" height="30" rx="8" fill="#0066B3" stroke="#004080" stroke-width="1" />
+  <rect x="20" y="25" width="110" height="20" rx="5" fill="#0066B3"/>
+  <rect x="20" y="22" width="110" height="3" rx="1" fill="#0066B3"/>
   
-  <!-- Front window -->
-  <path d="M45,70 L60,60 L60,80 L45,70 Z" fill="#B3D9FF" />
-  
-  <!-- Side windows -->
-  <rect x="70" y="60" width="20" height="15" rx="2" fill="#B3D9FF" />
-  <rect x="100" y="60" width="20" height="15" rx="2" fill="#B3D9FF" />
-  <rect x="130" y="60" width="20" height="15" rx="2" fill="#B3D9FF" />
-  <rect x="160" y="60" width="20" height="15" rx="2" fill="#B3D9FF" />
+  <!-- Windows -->
+  <rect x="25" y="28" width="10" height="8" rx="1" fill="#C4E7FF"/>
+  <rect x="40" y="28" width="10" height="8" rx="1" fill="#C4E7FF"/>
+  <rect x="55" y="28" width="10" height="8" rx="1" fill="#C4E7FF"/>
+  <rect x="70" y="28" width="10" height="8" rx="1" fill="#C4E7FF"/>
+  <rect x="85" y="28" width="10" height="8" rx="1" fill="#C4E7FF"/>
+  <rect x="100" y="28" width="10" height="8" rx="1" fill="#C4E7FF"/>
+  <rect x="115" y="28" width="10" height="8" rx="1" fill="#C4E7FF"/>
   
   <!-- Doors -->
-  <rect x="80" y="78" width="5" height="7" fill="#CCCCCC" />
-  <rect x="110" y="78" width="5" height="7" fill="#CCCCCC" />
-  <rect x="140" y="78" width="5" height="7" fill="#CCCCCC" />
-  <rect x="170" y="78" width="5" height="7" fill="#CCCCCC" />
-  
-  <!-- TransLink logo -->
-  <rect x="85" y="78" width="10" height="10" fill="#FFD800" />
-  <text x="90" y="87" font-family="Arial" font-size="8" text-anchor="middle" fill="#004080">TL</text>
+  <line x1="35" y1="25" x2="35" y2="45" stroke="#004C8C" stroke-width="1"/>
+  <line x1="65" y1="25" x2="65" y2="45" stroke="#004C8C" stroke-width="1"/>
+  <line x1="95" y1="25" x2="95" y2="45" stroke="#004C8C" stroke-width="1"/>
   
   <!-- Wheels -->
-  <circle cx="60" cy="100" r="8" fill="#333" />
-  <circle cx="60" cy="100" r="4" fill="#666" />
-  <circle cx="90" cy="100" r="8" fill="#333" />
-  <circle cx="90" cy="100" r="4" fill="#666" />
-  <circle cx="150" cy="100" r="8" fill="#333" />
-  <circle cx="150" cy="100" r="4" fill="#666" />
-  <circle cx="180" cy="100" r="8" fill="#333" />
-  <circle cx="180" cy="100" r="4" fill="#666" />
+  <circle cx="35" cy="45" r="4" fill="#333333"/>
+  <circle cx="85" cy="45" r="4" fill="#333333"/>
+  <circle cx="115" cy="45" r="4" fill="#333333"/>
   
   <!-- Pantograph -->
-  <line x1="120" y1="50" x2="120" y2="30" stroke="#666" stroke-width="2" />
-  <polyline points="110,30 130,30" stroke="#666" stroke-width="2" fill="none" />
-  <line x1="120" y1="30" x2="120" y2="20" stroke="#666" stroke-width="1" />
+  <line x1="70" y1="22" x2="70" y2="10" stroke="#777777" stroke-width="1"/>
+  <line x1="80" y1="22" x2="80" y2="10" stroke="#777777" stroke-width="1"/>
+  <line x1="70" y1="10" x2="80" y2="10" stroke="#777777" stroke-width="2"/>
   
   <!-- Overhead wire -->
-  <line x1="10" y1="20" x2="230" y2="20" stroke="#999" stroke-width="1" />
+  <line x1="0" y1="8" x2="150" y2="8" stroke="#777777" stroke-width="1" stroke-dasharray="2,2"/>
 </svg> 

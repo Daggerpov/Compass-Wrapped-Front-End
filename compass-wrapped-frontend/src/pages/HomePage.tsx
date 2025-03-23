@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
-import { uploadCSV, getAllAnalytics } from '../services/api';
+import { getAllAnalytics } from '../services/api';
 import translinkLogo from '../assets/translink-logo.svg';
 import compassCard from '../assets/compass-card.svg';
 import skyline from '../assets/vancouver-skyline.svg';
@@ -56,10 +56,7 @@ const HomePage: React.FC = () => {
       setLoading(true);
       setFile(file);
       
-      // Upload the file
-      await uploadCSV(file);
-      
-      // Get all analytics
+      // Upload the file and get all analytics in one call
       const response = await getAllAnalytics(file);
       setAnalyticsData(response.data);
       
@@ -76,23 +73,23 @@ const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
       {/* Background image - skyline with reduced size */}
-      <div className="absolute bottom-0 left-0 right-0 w-full h-48 z-0">
-        <img src={skyline} alt="Vancouver Skyline" className="w-full h-full object-cover object-bottom" />
+      <div className="absolute bottom-0 left-0 right-0 w-full h-32 z-0">
+        <img src={skyline} alt="Vancouver Skyline" className="w-full h-full object-cover object-bottom opacity-30" />
       </div>
       
       {/* Animated SkyTrain with reduced size */}
-      <div className={`absolute bottom-48 transition-all duration-10000 ease-linear ${animateTrain ? 'left-full -translate-x-full' : '-left-40'}`}>
-        <img src={skytrain} alt="SkyTrain" className="h-12 w-auto" />
+      <div className={`absolute bottom-32 transition-all duration-10000 ease-linear ${animateTrain ? 'left-full -translate-x-full' : '-left-20'}`}>
+        <img src={skytrain} alt="SkyTrain" className="h-8 w-auto" />
       </div>
       
       {/* Header */}
       <header className="relative z-10 pt-6 pb-4 px-6 bg-white shadow-sm">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
-          <div className="w-32 mb-4 sm:mb-0">
+          <div className="w-24 mb-4 sm:mb-0">
             <img src={translinkLogo} alt="TransLink Logo" className="w-full" />
           </div>
           <div className="flex items-center gap-3">
-            <img src={compassCard} alt="Compass Card" className="h-8 w-auto" />
+            <img src={compassCard} alt="Compass Card" className="h-6 w-auto" />
             <h2 className="text-xl font-medium text-translink-blue">Compass Wrapped 2023</h2>
           </div>
         </div>
@@ -103,8 +100,8 @@ const HomePage: React.FC = () => {
         <div className="max-w-6xl w-full mx-auto flex flex-col lg:flex-row items-center gap-12 py-8">
           {/* Left side - Compass Card */}
           <div className="w-full lg:w-2/5 flex justify-center lg:justify-end transform hover:rotate-3 transition-transform">
-            <div className="w-full max-w-xs mx-auto mb-6">
-              <img src={compassCard} alt="Compass Card" className="w-full drop-shadow-lg" />
+            <div className="w-full max-w-sm mx-auto mb-6">
+              <img src={compassCard} alt="Compass Card" className="w-full max-w-xs mx-auto drop-shadow-lg" />
             </div>
           </div>
           

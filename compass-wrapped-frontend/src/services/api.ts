@@ -66,5 +66,5 @@ export const getCompassWrapped = async (file: File) => {
 export const getAllAnalytics = async (file: File) => {
   const formData = new FormData();
   formData.append('file', file);
-  return api.post('/analytics/analyze-csv', formData);
+  return api.post('/analytics/analyze/', formData);
 }; 

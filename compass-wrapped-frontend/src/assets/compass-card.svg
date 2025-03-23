@@ -1,30 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 216">
+<svg width="240" height="120" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg">
   <!-- Card body -->
-  <rect x="5" y="5" width="330" height="206" rx="10" fill="#0066B3" />
-  <rect x="10" y="10" width="320" height="196" rx="8" fill="#0066B3" stroke="#004080" stroke-width="1" />
+  <rect width="240" height="120" rx="10" fill="#0066B3" stroke="#00478F" stroke-width="2"/>
   
-  <!-- Compass Logo -->
-  <circle cx="170" cy="108" r="60" fill="#FFFFFF" />
-  <circle cx="170" cy="108" r="58" fill="#0066B3" />
-  <circle cx="170" cy="108" r="50" fill="#FFFFFF" />
-  
+  <!-- Compass logo -->
+  <circle cx="120" cy="60" r="40" fill="#F0F0F0" stroke="#FFFFFF" stroke-width="1"/>
+  <circle cx="120" cy="60" r="35" fill="#0066B3"/>
   <!-- Compass needle -->
-  <path d="M170 78 L175 108 L170 138 L165 108 Z" fill="#0066B3" />
-  <path d="M140 108 L170 103 L200 108 L170 113 Z" fill="#0066B3" />
-  <circle cx="170" cy="108" r="8" fill="#0066B3" />
+  <path d="M120 25 L127 60 L120 95 L113 60 Z" fill="#F0F0F0"/>
+  <path d="M85 60 L120 53 L155 60 L120 67 Z" fill="#F0F0F0"/>
   
-  <!-- Card chip -->
-  <rect x="50" y="50" width="35" height="30" rx="3" fill="#FFD800" />
-  <rect x="55" y="55" width="25" height="5" fill="#FFB000" />
-  <rect x="55" y="65" width="25" height="5" fill="#FFB000" />
+  <!-- Chip -->
+  <rect x="30" y="30" width="20" height="20" rx="2" fill="#FFD800"/>
+  <rect x="33" y="35" width="14" height="3" rx="1" fill="#FFA500"/>
+  <rect x="33" y="41" width="14" height="3" rx="1" fill="#FFA500"/>
   
-  <!-- Tap here indicator -->
-  <circle cx="270" cy="60" r="25" fill="#FFFFFF" opacity="0.8" />
-  <text x="270" y="65" font-family="Arial" font-size="10" text-anchor="middle" fill="#0066B3">TAP HERE</text>
+  <!-- TAP HERE indicator -->
+  <circle cx="195" cy="45" r="25" fill="#F0F0F0"/>
+  <text x="195" y="50" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0066B3" text-anchor="middle">TAP HERE</text>
   
-  <!-- Card number -->
-  <text x="50" y="160" font-family="Arial" font-size="14" fill="#FFFFFF">0123 4567 8901 2345</text>
-  
-  <!-- Expiry -->
-  <text x="50" y="180" font-family="Arial" font-size="10" fill="#FFFFFF">VALID THRU: 12/25</text>
+  <!-- Card number and expiry -->
+  <text x="35" y="95" font-family="Arial, sans-serif" font-size="12" fill="#FFFFFF">0123 4567 8901 2345</text>
+  <text x="35" y="110" font-family="Arial, sans-serif" font-size="10" fill="#FFFFFF">VALID THRU: 12/25</text>
 </svg> 
