@@ -1,4 +1,3 @@
-import React from 'react';
 import compassCardImg from '../../assets/new-from-figma/compass-card.png';
 
 const Header = () => {

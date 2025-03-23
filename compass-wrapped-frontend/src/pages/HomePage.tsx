@@ -4,7 +4,7 @@ import CSVInstructions from '../components/CSVInstructions';
 
 const HomePage: React.FC = () => {
   const [uploading, setUploading] = useState(false);
-  const [uploadedContent, setUploadedContent] = useState('');
+  const uploadedContent = '';
 
   return (
     <div className="min-h-screen flex flex-col items-center relative">

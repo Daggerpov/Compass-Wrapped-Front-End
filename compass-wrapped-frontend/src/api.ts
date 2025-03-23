@@ -1,6 +1,8 @@
-import axios from 'axios';
+// Left commented to keep the import if needed later
+// import axios from 'axios';
 
-const API_URL = 'https://compass-wrapped-back-end.up.railway.app/';
+// Left commented to keep the variable if needed later
+// const API_URL = 'https://compass-wrapped-back-end.up.railway.app/';
 
 export interface ApiResponse<T> {
   success: boolean;

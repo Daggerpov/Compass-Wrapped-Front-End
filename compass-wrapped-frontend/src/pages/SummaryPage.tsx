@@ -6,12 +6,6 @@ import TimelineSlide from '../components/slides/TimelineSlide';
 import PersonalitySlide from '../components/slides/PersonalitySlide';
 import AchievementsSlide from '../components/slides/AchievementsSlide';
 
-interface PersonalitySlideProps {
-  personalityType: string;
-  commonTime: string;
-  details: string;
-}
-
 interface SlideConfig {
   id: string;
   component: React.ComponentType<any>;

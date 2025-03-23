@@ -8,7 +8,7 @@ interface CSVInstructionsProps {
   uploadedContent: string;
 }
 
-const CSVInstructions: React.FC<CSVInstructionsProps> = ({ uploading, setUploading, uploadedContent }) => {
+const CSVInstructions: React.FC<CSVInstructionsProps> = ({ uploading, uploadedContent }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

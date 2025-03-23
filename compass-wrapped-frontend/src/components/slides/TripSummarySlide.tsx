@@ -1,35 +1,59 @@
-import React from 'react';
+// No need to import React explicitly
 
-export default function TripSummarySlide() {
+interface TripSummaryProps {
+  totalTrips?: number;
+  totalHours?: number;
+  uniqueRoutes?: number;
+  favoriteLine?: string;
+}
+
+const TripSummarySlide: React.FC<TripSummaryProps> = ({
+  totalTrips = 325,
+  totalHours = 184,
+  uniqueRoutes = 28,
+  favoriteLine = "99 B-Line"
+}) => {
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <h2 className="text-3xl font-bold mb-8">Your Monthly Transit Summary</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl">
-        <div className="card p-6 text-center">
-          <h3 className="text-xl font-semibold mb-2">Total Trips</h3>
-          <p className="text-4xl font-bold text-translink-blue">32</p>
-          <p className="text-gray-600 mt-2">trips this month</p>
+    <div className="w-full h-full flex flex-col items-center justify-center bg-blue-50 px-6 py-10">
+      <div className="max-w-md w-full">
+        <h2 className="text-2xl font-bold text-translink-blue text-center mb-6">Your Transit Journey</h2>
+        
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="bg-white rounded-lg shadow-md p-5 text-center">
+            <p className="text-3xl font-bold text-translink-blue">{totalTrips}</p>
+            <p className="text-sm text-gray-600">Total Trips</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-md p-5 text-center">
+            <p className="text-3xl font-bold text-translink-blue">{totalHours}</p>
+            <p className="text-sm text-gray-600">Hours on Transit</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-md p-5 text-center">
+            <p className="text-3xl font-bold text-translink-blue">{uniqueRoutes}</p>
+            <p className="text-sm text-gray-600">Unique Routes</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-md p-5 text-center">
+            <p className="text-md font-bold text-translink-blue">{favoriteLine}</p>
+            <p className="text-sm text-gray-600">Favorite Line</p>
+          </div>
         </div>
         
-        <div className="card p-6 text-center">
-          <h3 className="text-xl font-semibold mb-2">Time Spent</h3>
-          <p className="text-4xl font-bold text-translink-blue">18</p>
-          <p className="text-gray-600 mt-2">hours on transit</p>
-        </div>
-        
-        <div className="card p-6 text-center">
-          <h3 className="text-xl font-semibold mb-2">Most Active Day</h3>
-          <p className="text-4xl font-bold text-translink-blue">Wed</p>
-          <p className="text-gray-600 mt-2">8 trips on average</p>
-        </div>
-        
-        <div className="card p-6 text-center">
-          <h3 className="text-xl font-semibold mb-2">Peak Travel Time</h3>
-          <p className="text-4xl font-bold text-translink-blue">8:15</p>
-          <p className="text-gray-600 mt-2">morning commute</p>
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <h3 className="text-lg font-bold text-translink-blue mb-3">Your Transit Profile</h3>
+          <p className="text-gray-700">
+            You're a <span className="font-medium">Regular Commuter</span>, primarily traveling during weekday rush hours.
+            Most of your trips are between home and work or school.
+          </p>
+          <div className="mt-4 text-sm text-gray-600">
+            <p>Most active day: <span className="font-medium text-gray-800">Wednesday</span></p>
+            <p>Most common time: <span className="font-medium text-gray-800">8:15 AM</span></p>
+          </div>
         </div>
       </div>
     </div>
   );
-} 
+};
+
+export default TripSummarySlide; 

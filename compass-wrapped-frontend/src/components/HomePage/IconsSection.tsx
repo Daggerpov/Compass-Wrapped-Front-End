@@ -1,6 +1,5 @@
 import compassCardImg from '../../assets/new-from-figma/compass-card.png';
 import busLeftImg from '../../assets/new-from-figma/bus-facing-left.png';
-import busRightImg from '../../assets/new-from-figma/bus-facing-right.png';
 import longerBusImg from '../../assets/new-from-figma/longer-bus-facing-right.png';
 import skytrainLeftImg from '../../assets/new-from-figma/skytrain-facing-out-and-left.png';
 import skytrainRightImg from '../../assets/new-from-figma/skytrain-facing-right.png';

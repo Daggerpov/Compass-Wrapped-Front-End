@@ -1,51 +1,45 @@
-import React from 'react';
+interface StopData {
+  stop_id: string;
+  stop_name: string;
+  count: number;
+}
 
-export default function StopsSlide() {
-  const topStops = [
-    {
-      name: "Eastbound University Blvd",
-      trips: 24,
-      type: "Bus Stop"
-    },
-    {
-      name: "Commercial-Broadway Station",
-      trips: 18,
-      type: "SkyTrain Station"
-    },
-    {
-      name: "Waterfront Station",
-      trips: 12,
-      type: "SkyTrain & SeaBus"
-    }
-  ];
+interface StopsSlideProps {
+  topStops?: StopData[];
+}
 
+const DEFAULT_STOPS: StopData[] = [
+  { stop_id: "60980", stop_name: "Waterfront Station", count: 76 },
+  { stop_id: "61125", stop_name: "Commercial-Broadway Station", count: 52 },
+  { stop_id: "60916", stop_name: "Lougheed Town Centre Station", count: 38 },
+  { stop_id: "59946", stop_name: "Surrey Central Station", count: 29 },
+  { stop_id: "60986", stop_name: "Burrard Station", count: 22 }
+];
+
+const StopsSlide: React.FC<StopsSlideProps> = ({ topStops = DEFAULT_STOPS }) => {
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <h2 className="text-3xl font-bold mb-8">Your Most Visited Stops</h2>
-      
-      <div className="w-full max-w-2xl space-y-6">
-        {topStops.map((stop, index) => (
-          <div key={stop.name} className="card p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-xl font-semibold">{stop.name}</h3>
-                <p className="text-gray-600">{stop.type}</p>
-              </div>
-              <div className="text-right">
-                <p className="text-3xl font-bold text-translink-blue">{stop.trips}</p>
-                <p className="text-gray-600">trips</p>
+    <div className="w-full h-full flex flex-col items-center justify-center bg-blue-50 px-6 py-10">
+      <div className="max-w-md w-full">
+        <h2 className="text-2xl font-bold text-translink-blue text-center mb-6">Your Top Stations</h2>
+        
+        <div className="space-y-4">
+          {topStops.map((stop) => (
+            <div key={stop.stop_id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-translink-blue to-translink-secondary rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+                  {stop.count}
+                </div>
+                <div>
+                  <h3 className="font-medium text-gray-800">{stop.stop_name}</h3>
+                  <p className="text-sm text-gray-500">{stop.count} visits</p>
+                </div>
               </div>
             </div>
-            
-            <div className="mt-4 bg-gray-200 h-2 rounded-full">
-              <div 
-                className="bg-translink-blue h-full rounded-full"
-                style={{ width: `${(stop.trips / topStops[0].trips) * 100}%` }}
-              />
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
-} 
+};
+
+export default StopsSlide; 
