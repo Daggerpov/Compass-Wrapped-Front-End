@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSwipeable } from 'react-swipeable';
-import translinkLogo from '../assets/translink-logo.svg';
-import compassCard from '../assets/compass-card.svg';
+import { Header, SlideCarousel, NavigationControls } from '../components/SummaryPage';
 import TripSummarySlide from '../components/slides/TripSummarySlide';
 import StopsSlide from '../components/slides/StopsSlide';
 import TimelineSlide from '../components/slides/TimelineSlide';
@@ -14,13 +12,11 @@ interface PersonalitySlideProps {
   details: string;
 }
 
-type SlideProps = PersonalitySlideProps | Record<string, never>;
-
 interface SlideConfig {
   id: string;
-  component: React.ComponentType<SlideProps>;
+  component: React.ComponentType<any>;
   title: string;
-  props?: SlideProps;
+  props?: any;
 }
 
 const slides: SlideConfig[] = [
@@ -63,12 +59,6 @@ export default function SummaryPage() {
     }
   };
 
-  const handlers = useSwipeable({
-    onSwipedLeft: nextSlide,
-    onSwipedRight: prevSlide,
-    trackMouse: true
-  });
-
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') nextSlide();
@@ -81,72 +71,23 @@ export default function SummaryPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="header">
-        <div className="container-custom py-4 flex flex-col sm:flex-row justify-between items-center">
-          <div className="mb-4 sm:mb-0">
-            <img src={translinkLogo} alt="TransLink Logo" className="img-logo" />
-          </div>
-          <div className="flex items-center gap-3">
-            <img src={compassCard} alt="Compass Card" className="img-icon" />
-            <h2 className="text-xl font-medium text-translink-blue">Monthly Transit Summary</h2>
-          </div>
-        </div>
-      </header>
-
-      {/* Carousel */}
-      <div className="container-custom py-8" {...handlers}>
-        <div className="card overflow-hidden">
-          <div className="relative h-[600px]">
-            {slides.map((slide, index) => {
-              const Component = slide.component;
-              return (
-                <div
-                  key={slide.id}
-                  className="carousel-slide p-6"
-                  style={{
-                    transform: `translateX(${(index - activeIndex) * 100}%)`,
-                    opacity: index === activeIndex ? 1 : 0,
-                  }}
-                >
-                  <Component {...(slide.props || {})} />
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="carousel-nav">
-            {slides.map((slide, index) => (
-              <button
-                key={slide.id}
-                className={`carousel-dot ${index === activeIndex ? 'active' : ''}`}
-                onClick={() => goToSlide(index)}
-                aria-label={`Go to ${slide.title}`}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="flex justify-between mt-8">
-          <button
-            onClick={prevSlide}
-            className={`btn ${activeIndex === 0 ? 'btn-outline opacity-50' : 'btn-outline'}`}
-            disabled={activeIndex === 0}
-          >
-            Previous
-          </button>
-          <button
-            onClick={nextSlide}
-            className={`btn ${activeIndex === slides.length - 1 ? 'btn-outline opacity-50' : 'btn-primary'}`}
-            disabled={activeIndex === slides.length - 1}
-          >
-            Next
-          </button>
-        </div>
-
-        <div className="swipe-instruction">
-          Swipe or use arrow keys to navigate
-        </div>
+      <Header />
+      
+      <div className="container-custom py-8">
+        <SlideCarousel 
+          slides={slides}
+          activeIndex={activeIndex}
+          nextSlide={nextSlide}
+          prevSlide={prevSlide}
+          goToSlide={goToSlide}
+        />
+        
+        <NavigationControls 
+          activeIndex={activeIndex}
+          totalSlides={slides.length}
+          nextSlide={nextSlide}
+          prevSlide={prevSlide}
+        />
       </div>
     </div>
   );
