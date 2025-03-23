@@ -65,14 +65,14 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-translink-blue/5 via-white to-translink-gray/20 relative overflow-hidden">
+    <div className="flex-col-center min-h-screen bg-gradient-to-b from-translink-blue/5 via-white to-translink-gray/20 relative overflow-hidden">
       <Background />
       <div className="w-full">
         <Header timeRangeText={getTimeRangeText()} />
       </div>
 
-      <main className="container max-w-[1200px] mx-auto px-4 sm:px-6 w-full py-14 sm:py-16 relative z-10 flex flex-col items-center justify-center">
-        <div className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center">
+      <main className="center-container py-14 sm:py-16 relative z-10">
+        <div className="width-container flex-col-center">
           <TimeRangeSelector 
             timeRange={timeRange} 
             setTimeRange={setTimeRange} 

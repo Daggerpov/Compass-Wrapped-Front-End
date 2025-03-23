@@ -24,10 +24,10 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
   getTimeRangeText
 }) => {
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="flex-col-center w-full">
       <div 
         {...getRootProps()} 
-        className={`card w-full max-w-2xl p-10 text-center cursor-pointer transition-all duration-300 shadow-md rounded-2xl hover:shadow-card animate-slide-up ${
+        className={`card width-container p-10 text-center cursor-pointer transition-all duration-300 shadow-md rounded-2xl hover:shadow-card animate-slide-up ${
           isDragActive 
             ? 'border-translink-blue border-2 bg-translink-light-blue/50 scale-[1.01]' 
             : isHovering
@@ -39,8 +39,8 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
         onMouseLeave={() => setIsHovering(false)}
       >
         <input {...getInputProps()} />
-        <div className="flex flex-col items-center justify-center">
-          <div className={`w-20 h-20 mx-auto mb-5 bg-gradient-to-br from-translink-blue/30 to-translink-light-blue/40 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-inner ${
+        <div className="flex-col-center">
+          <div className={`w-20 h-20 mx-auto mb-5 bg-gradient-to-br from-translink-blue/30 to-translink-light-blue/40 rounded-full flex-center overflow-hidden transition-all duration-300 shadow-inner ${
             isDragActive ? 'scale-110 bg-translink-blue/40' : isHovering ? 'scale-105 bg-translink-blue/20' : ''
           }`}>
             <img src={compassCard} alt="Upload" className={`w-8 h-8 transition-all duration-300 ${isDragActive ? 'scale-110' : isHovering ? 'scale-105' : ''}`} />
@@ -57,7 +57,7 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
       </div>
 
       {isUploaded && (
-        <div className="mt-8 text-center animate-slide-up w-full flex flex-col items-center justify-center" style={{ animationDelay: '0.45s' }}>
+        <div className="flex-col-center mt-8 text-center animate-slide-up w-full" style={{ animationDelay: '0.45s' }}>
           <Button
             onClick={handleContinue}
             size="lg"
