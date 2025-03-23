@@ -31,7 +31,7 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
       <Card 
         {...getRootProps()} 
         className={cn(
-          "w-full max-w-xl mx-auto p-8 text-center cursor-pointer transition-all duration-300 hover:shadow-lg",
+          "w-full max-w-xl mx-auto p-8 text-center cursor-pointer transition-all duration-300 hover:shadow-lg relative",
           isDragActive 
             ? "border-primary border-2 bg-primary/10 scale-[1.01]" 
             : isHovering
@@ -41,6 +41,25 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
+        {/* Upload indicator icon */}
+        <div className="absolute -top-3 -right-3 bg-primary rounded-full w-8 h-8 flex items-center justify-center shadow-md">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="white" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+        </div>
+
         <input {...getInputProps()} />
         <CardContent className="flex flex-col items-center p-0">
           <div className={cn(
@@ -67,12 +86,30 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
         </CardContent>
       </Card>
 
+      <div className="mt-6 flex gap-4 justify-center w-full">
+        <Button 
+          variant="outline" 
+          size="lg"
+          className="rounded-full shadow-sm border-primary/20 hover:border-primary hover:bg-primary/5"
+        >
+          View Example Insights
+        </Button>
+        <Button 
+          variant="outline" 
+          size="lg"
+          className="rounded-full shadow-sm border-primary/20 hover:border-primary hover:bg-primary/5"
+        >
+          View CSV Instructions
+        </Button>
+      </div>
+
       {isUploaded && (
         <div className="mt-8 text-center w-full flex flex-col items-center animate-fade-in">
           <Button
             onClick={handleContinue}
             size="lg"
-            className="bg-gradient-to-r from-primary to-primary/80 hover:shadow-lg px-8 py-6 text-base font-medium transition-all duration-300 mx-auto"
+            variant="default"
+            className="rounded-full bg-gradient-to-r from-primary to-primary/80 hover:shadow-lg px-8 py-6 text-base font-medium transition-all duration-300 mx-auto"
           >
             <img src={compassCardImg} alt="" className="w-5 h-5 mr-2" />
             Explore Your {getTimeRangeText()} Transit Insights
