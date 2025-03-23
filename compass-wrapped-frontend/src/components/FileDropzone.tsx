@@ -58,7 +58,7 @@ const FileDropzone: React.FC = () => {
   };
 
   return (
-    <div className="width-container">
+    <>
       <div 
         className={`border-2 border-dashed rounded-xl p-6 flex-col-center cursor-pointer transition-all ${
           isDragging 
@@ -111,7 +111,7 @@ const FileDropzone: React.FC = () => {
           </svg>
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 
