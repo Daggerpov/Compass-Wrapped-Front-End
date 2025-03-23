@@ -13,13 +13,13 @@ const PersonalitySlide: React.FC<PersonalitySlideProps> = ({
   return (
     <div className="width-container">
       <div 
-        className={`border-2 border-dashed rounded-xl p-6 flex-col-center`}>
+        className={`border-2 border-dashed rounded-xl p-3 flex-col-center`}>
         <div className="text-center">
           <h2 className="text-2xl font-bold">You're a</h2>
-          <h1 className="text-4xl font-bold mt-2">{personalityType}!</h1>
+          <h1 className="text-4xl font-bold mt-1">{personalityType}!</h1>
         </div>
         
-        <div className="my-8">
+        <div className="my-4">
           <img
             src={owlIconSvg}
             alt="Night Rider Owl"

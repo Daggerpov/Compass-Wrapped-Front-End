@@ -104,15 +104,15 @@ const TimeSpentSlide: React.FC<TimeSpentSlideProps> = ({
   return (
     <div className="width-container">
       <div 
-        className={`border-2 border-dashed rounded-xl p-6 flex-col-center`}>
-        <div className="w-full h-full flex flex-col items-center justify-between bg-translink-blue text-white px-6 py-10">
+        className={`border-2 border-dashed rounded-xl p-3 flex-col-center`}>
+        <div className="w-full h-full flex flex-col items-center justify-between bg-translink-blue text-white px-4 py-6">
           <div className="text-center">
             <p className="text-lg">You've spent</p>
-            <p className="text-3xl font-bold mb-2">{hoursSpent} hours</p>
+            <p className="text-3xl font-bold mb-1">{hoursSpent} hours</p>
             <p className="text-lg">on <span className="font-bold">{transit}</span> this year!</p>
           </div>
           
-          <div className="my-8">
+          <div className="my-4">
             <img
               src={skytrainImg}
               alt="SkyTrain"
@@ -123,7 +123,7 @@ const TimeSpentSlide: React.FC<TimeSpentSlideProps> = ({
           <div className="mt-auto text-sm opacity-80 text-center">
             <p>That's {Math.round(hoursSpent * 60 / 20)} 20-minute episodes of your favorite show!</p>
             
-            <div className="flex justify-center items-center mt-4">
+            <div className="flex justify-center items-center mt-2">
               <canvas ref={canvasRef} width="80" height="80" />
             </div>
           </div>

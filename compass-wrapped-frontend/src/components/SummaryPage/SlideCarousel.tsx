@@ -35,7 +35,7 @@ const SlideCarousel: React.FC<SlideCarouselProps> = ({
 
   return (
     <div {...handlers} className="card overflow-hidden">
-      <div className="relative h-[500px]">
+      <div className="relative h-[450px]">
         {slides.map((slide, index) => {
           const Component = slide.component;
           return (

@@ -12,13 +12,13 @@ const MostTraveledRouteSlide: React.FC<MostTraveledRouteSlideProps> = ({
   return (
     <div className="width-container">
       <div 
-        className={`border-2 border-dashed rounded-xl p-6 flex-col-center`}>
-        <div className="w-full h-full flex flex-col items-center justify-center bg-translink-yellow text-translink-blue px-6 py-10">
+        className={`border-2 border-dashed rounded-xl p-3 flex-col-center`}>
+        <div className="w-full h-full flex flex-col items-center justify-center bg-translink-yellow text-translink-blue px-4 py-6">
           {/* Title */}
-          <h2 className="text-xl font-semibold text-center mb-8">Your Most Used Stop</h2>
+          <h2 className="text-xl font-semibold text-center mb-4">Your Most Used Stop</h2>
           
           {/* Route Name */}
-          <div className="text-center mb-6">
+          <div className="text-center mb-3">
             <div className="text-5xl font-bold text-translink-blue">{routeDirection}</div>
             <div className="text-5xl font-bold text-translink-blue">{routeName}</div>
           </div>

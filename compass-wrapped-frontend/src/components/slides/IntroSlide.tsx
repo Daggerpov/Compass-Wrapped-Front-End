@@ -14,20 +14,20 @@ const IntroSlide: React.FC<IntroSlideProps> = ({
   return (
     <div className="width-container">
       <div 
-        className={`border-2 border-dashed rounded-xl p-6 flex-col-center`}>
-        <div className="w-full h-full flex flex-col items-center justify-center bg-translink-blue text-white px-6 py-10">
-          <div className="text-center mb-6">
+        className={`border-2 border-dashed rounded-xl p-3 flex-col-center`}>
+        <div className="w-full h-full flex flex-col items-center justify-center bg-translink-blue text-white px-4 py-6">
+          <div className="text-center mb-3">
             <h2 className="text-2xl font-bold">{month}</h2>
             <h1 className="text-4xl font-bold">COMPASS</h1>
-            <h1 className="text-4xl font-bold mb-8">WRAPPED</h1>
+            <h1 className="text-4xl font-bold mb-4">WRAPPED</h1>
           </div>
           
-          <div className="mt-4 text-center">
-            <div className="text-6xl font-bold mb-2">{totalTrips}</div>
-            <p className="text-xl mb-6">Total Rides</p>
+          <div className="mt-2 text-center">
+            <div className="text-6xl font-bold mb-1">{totalTrips}</div>
+            <p className="text-xl mb-3">Total Rides</p>
           </div>
           
-          <div className="mt-4 flex items-center justify-center">
+          <div className="mt-2 flex items-center justify-center">
             <img
               src={compassCardImg}
               alt="Compass Card"
@@ -35,7 +35,7 @@ const IntroSlide: React.FC<IntroSlideProps> = ({
             />
           </div>
           
-          <div className="mt-6 text-center text-sm opacity-80">
+          <div className="mt-3 text-center text-sm opacity-80">
             <p>That's {Math.round(totalTrips / 30)} trips on average per month in {year}!</p>
           </div>
         </div>
