@@ -53,8 +53,6 @@ const HomePage: React.FC = () => {
     try {
       setLoading(true);
       setFile(file);
-      
-      // Upload the file and get all analytics in one call
       const response = await getAllAnalytics(file);
       setAnalyticsData(response.data);
       
