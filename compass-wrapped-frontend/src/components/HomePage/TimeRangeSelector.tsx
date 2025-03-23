@@ -13,25 +13,26 @@ const TimeRangeSelector: React.FC<TimeRangeSelectorProps> = ({
   getTimeRangeText 
 }) => {
   return (
-    <div className="text-center mb-8 animate-slide-up">
-      <span className="inline-block px-3 py-1 bg-translink-blue/15 text-translink-blue font-medium rounded-full mb-3 text-xs shadow-sm">
-        Your Personal Transit Story
+    <div className="text-center mb-10 animate-slide-up">
+      <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-translink-blue/15 to-translink-light-blue/30 text-translink-blue font-medium rounded-full mb-4 text-xs shadow-sm">
+        Your Personal Transit Journey
       </span>
-      <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 leading-tight">
-        Discover Your <span className="text-translink-blue bg-gradient-to-r from-translink-blue to-translink-secondary bg-clip-text text-transparent">
-          {getTimeRangeText()}</span> Transit Journey
+      <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-5 leading-tight tracking-tight">
+        Discover Your <span className="bg-gradient-to-r from-translink-blue to-translink-secondary bg-clip-text text-transparent">
+          {getTimeRangeText()}</span> Transit Story
       </h1>
-      <p className="text-base text-gray-600 mb-5 max-w-md mx-auto leading-relaxed">
-        Upload your Compass Card data to see personalized insights about your transit habits
+      <p className="text-base sm:text-lg text-gray-600 mb-6 max-w-lg mx-auto leading-relaxed">
+        Upload your Compass Card data to visualize and explore your transit habits and patterns
       </p>
 
-      <div className="flex justify-center gap-2 mb-5">
+      <div className="flex justify-center gap-3 mb-6">
         {['week', 'month', 'year'].map((range) => (
           <Button
             key={range}
             onClick={() => setTimeRange(range)}
             variant={timeRange === range ? 'default' : 'outline'}
             size="sm"
+            className={`px-5 py-2 ${timeRange === range ? 'shadow-md' : ''} transition-all duration-300`}
           >
             {range.charAt(0).toUpperCase() + range.slice(1)}ly
           </Button>

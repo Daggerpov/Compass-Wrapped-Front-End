@@ -65,19 +65,19 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-translink-blue/10 via-white to-translink-gray relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-translink-blue/5 via-white to-translink-gray/20 relative overflow-hidden">
       <Background />
       <Header timeRangeText={getTimeRangeText()} />
 
-      <main className="container-custom py-10 sm:py-12 relative z-10">
-        <div className="max-w-lg mx-auto">
+      <main className="container-custom py-14 sm:py-16 relative z-10">
+        <div className="max-w-2xl mx-auto">
           <TimeRangeSelector 
             timeRange={timeRange} 
             setTimeRange={setTimeRange} 
             getTimeRangeText={getTimeRangeText} 
           />
 
-          <div className="mb-6 animate-slide-up transform hover:translate-y-[-2px] transition-transform duration-300 shadow-sm rounded-xl overflow-hidden" style={{ animationDelay: '0.15s' }}>
+          <div className="mb-8 animate-slide-up transform hover:shadow-lg hover:translate-y-[-2px] transition-transform duration-300 shadow-md rounded-2xl overflow-hidden" style={{ animationDelay: '0.15s' }}>
             <CSVInstructions />
           </div>
 
