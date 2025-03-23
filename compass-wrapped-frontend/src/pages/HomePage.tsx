@@ -10,7 +10,8 @@ import {
   Background, 
   TimeRangeSelector, 
   FileDropzone, 
-  Footer 
+  Footer,
+  IconsSection
 } from '../components/HomePage';
 
 export default function HomePage() {
@@ -94,6 +95,8 @@ export default function HomePage() {
             getTimeRangeText={getTimeRangeText}
           />
         </div>
+        
+        <IconsSection />
       </main>
 
       <div className="w-full mt-auto">

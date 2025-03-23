@@ -1,0 +1,21 @@
+<svg width="160" height="90" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M35 40C35 31.7157 56.3071 25 82.5 25C108.693 25 130 31.7157 130 40V50C130 58.2843 108.693 65 82.5 65C56.3071 65 35 58.2843 35 50V40Z" fill="#D3D3D3"/>
+  <path d="M35 40C35 31.7157 56.3071 25 82.5 25C108.693 25 130 31.7157 130 40M35 40V50C35 58.2843 56.3071 65 82.5 65C108.693 65 130 58.2843 130 50V40M35 40C35 48.2843 56.3071 55 82.5 55C108.693 55 130 48.2843 130 40" stroke="#666666"/>
+  <ellipse cx="82.5" cy="40" rx="47.5" ry="15" fill="#0066B3"/>
+  <path d="M50 40C50 38.3431 63.8792 37 81 37C98.1208 37 112 38.3431 112 40C112 41.6569 98.1208 43 81 43C63.8792 43 50 41.6569 50 40Z" fill="#D3D3D3"/>
+  <rect x="79" y="30" width="7" height="5" fill="white"/>
+  <rect x="84" y="50" width="7" height="5" transform="rotate(-180 84 50)" fill="white"/>
+  <rect x="65" y="33" width="5" height="3" fill="white"/>
+  <rect x="74" y="33" width="5" height="3" fill="white"/>
+  <rect x="93" y="33" width="5" height="3" fill="white"/>
+  <rect x="102" y="33" width="5" height="3" fill="white"/>
+  <rect x="67" y="47" width="5" height="3" transform="rotate(-180 67 47)" fill="white"/>
+  <rect x="76" y="47" width="5" height="3" transform="rotate(-180 76 47)" fill="white"/>
+  <rect x="95" y="47" width="5" height="3" transform="rotate(-180 95 47)" fill="white"/>
+  <rect x="104" y="47" width="5" height="3" transform="rotate(-180 104 47)" fill="white"/>
+  <path d="M35 45L25 50L35 55" fill="#0066B3"/>
+  <path d="M130 45L140 50L130 55" fill="#0066B3"/>
+  <path d="M82.5 65V75" stroke="#0066B3" stroke-width="2"/>
+  <path d="M70 70H95" stroke="#0066B3" stroke-width="2"/>
+  <path d="M25 65C25 77.5 45 85 83 85C120 85 140 77.5 140 65" stroke="#0099CC" stroke-width="2" stroke-dasharray="4 2"/>
+</svg> 
