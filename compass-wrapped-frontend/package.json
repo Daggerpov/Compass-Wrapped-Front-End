@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "tsc -b && vite build",
+    "prebuild": "node build-check.js",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
