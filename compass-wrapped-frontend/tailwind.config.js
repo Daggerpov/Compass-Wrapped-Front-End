@@ -4,6 +4,9 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    'sm:w-160'
+  ],
   theme: {
     extend: {
       colors: {
@@ -78,7 +81,8 @@ export default {
         '72': '18rem',
         '84': '21rem',
         '96': '24rem',
-        '128': '32rem'
+        '128': '32rem',
+        '160': '40rem'
       }
     },
   },
