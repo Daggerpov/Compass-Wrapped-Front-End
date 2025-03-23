@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ensure proper widths for containers */
-.full-width {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-/* Center containers with a specific maximum width */
-.center-container {
-  width: 100% !important;
-  max-width: 1200px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -313,17 +299,16 @@ h2 {
   @apply max-w-2xl w-full mx-auto flex flex-col items-center;
 }
 
+.center-container {
+  @apply container max-w-[1200px] mx-auto px-4 sm:px-6 flex flex-col items-center justify-center;
+}
+
 .flex-center {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  @apply flex items-center justify-center;
 }
 
 .flex-col-center {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
+  @apply flex flex-col items-center justify-center;
 }
 
 /* Needed for the collapsible animation */
