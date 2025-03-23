@@ -1,10 +1,15 @@
 import React, { useEffect, useRef } from 'react';
+import skytrainImg from '../../assets/new-from-figma/skytrain-facing-right.png';
 
 interface TimeSpentSlideProps {
-  totalHours: number;
+  hoursSpent?: number;
+  transit?: string;
 }
 
-const TimeSpentSlide: React.FC<TimeSpentSlideProps> = ({ totalHours }) => {
+const TimeSpentSlide: React.FC<TimeSpentSlideProps> = ({ 
+  hoursSpent = 194, 
+  transit = "SkyTrain" 
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
   // These values are unused in the component but kept for reference
@@ -97,23 +102,23 @@ const TimeSpentSlide: React.FC<TimeSpentSlideProps> = ({ totalHours }) => {
   }, []);
   
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-[#0B2447] text-white px-6 py-10">
-      {/* Title */}
-      <h2 className="text-xl font-semibold text-center mb-4">Total Time Spent on Transit</h2>
+    <div className="w-full h-full flex flex-col items-center justify-between bg-translink-blue text-white px-6 py-10">
+      <div className="text-center">
+        <p className="text-lg">You've spent</p>
+        <p className="text-3xl font-bold mb-2">{hoursSpent} hours</p>
+        <p className="text-lg">on <span className="font-bold">{transit}</span> this year!</p>
+      </div>
       
-      <div className="flex flex-col items-center">
-        {/* Clock visualization */}
-        <canvas ref={canvasRef} className="w-48 h-48 mb-4"></canvas>
-        
-        {/* Hours display */}
-        <div className="text-center">
-          <div className="text-4xl font-bold">
-            You've spent {totalHours} hours
-          </div>
-          <div className="text-lg mt-2">
-            on the SkyTrain this year!
-          </div>
-        </div>
+      <div className="my-8">
+        <img
+          src={skytrainImg}
+          alt="SkyTrain"
+          className="h-24 w-auto"
+        />
+      </div>
+      
+      <div className="mt-auto text-sm opacity-80 text-center">
+        <p>That's {Math.round(hoursSpent / 24)} full days of transit!</p>
       </div>
     </div>
   );

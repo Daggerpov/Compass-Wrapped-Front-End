@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Header, SlideCarousel, NavigationControls } from '../components/SummaryPage';
-import TripSummarySlide from '../components/slides/TripSummarySlide';
+import IntroSlide from '../components/slides/IntroSlide';
+import TotalTripsSlide from '../components/slides/TotalTripsSlide';
+import MostTraveledRouteSlide from '../components/slides/MostTraveledRouteSlide';
 import StopsSlide from '../components/slides/StopsSlide';
-import TimelineSlide from '../components/slides/TimelineSlide';
+import TimeSpentSlide from '../components/slides/TimeSpentSlide';
+import TransferSlide from '../components/slides/TransferSlide';
 import PersonalitySlide from '../components/slides/PersonalitySlide';
 import AchievementsSlide from '../components/slides/AchievementsSlide';
+import ClosingSlide from '../components/slides/ClosingSlide';
 
 interface SlideConfig {
   id: string;
@@ -14,17 +18,26 @@ interface SlideConfig {
 }
 
 const slides: SlideConfig[] = [
-  { id: 'summary', component: TripSummarySlide, title: 'Monthly Overview' },
-  { id: 'stops', component: StopsSlide, title: 'Top Stations' },
-  { id: 'timeline', component: TimelineSlide, title: 'Travel Timeline' },
+  { id: 'intro', component: IntroSlide, title: 'Introduction', props: { month: "MARCH" } },
+  { id: 'total-trips', component: TotalTripsSlide, title: 'Total Trips', props: { totalTrips: 312 } },
+  { id: 'route', component: MostTraveledRouteSlide, title: 'Most Used Route', props: { routeDirection: "Eastbound", routeName: "University Blvd" } },
+  { id: 'stops', component: StopsSlide, title: 'Top Stops' },
+  { id: 'time-spent', component: TimeSpentSlide, title: 'Time Spent', props: { hoursSpent: 194, transit: "SkyTrain" } },
+  { 
+    id: 'transfer', 
+    component: TransferSlide, 
+    title: 'Transfer Spot',
+    props: { 
+      transferSpot: "Broadway-City Hall Stn"
+    }
+  },
   { 
     id: 'personality', 
     component: PersonalitySlide, 
     title: 'Transit Personality',
     props: {
       personalityType: "Night Rider",
-      commonTime: "8:15 PM",
-      details: "184 hours on transit this month!"
+      details: "You've spent 194 hours on SkyTrain this year!"
     }
   },
   { 
@@ -32,51 +45,17 @@ const slides: SlideConfig[] = [
     component: AchievementsSlide, 
     title: 'Achievements',
     props: {
-      totalTrips: 342,
-      achievements: [
-        {
-          id: "early_bird",
-          title: "Early Bird",
-          description: "Caught the first train 20+ times",
-          icon: "early_bird",
-          unlocked: true
-        },
-        {
-          id: "distance",
-          title: "Distance Champion",
-          description: "Traveled over 1000km on transit",
-          icon: "distance",
-          unlocked: true
-        },
-        {
-          id: "explorer",
-          title: "City Explorer",
-          description: "Used 25+ different routes",
-          icon: "explorer",
-          unlocked: false
-        },
-        {
-          id: "weekend",
-          title: "Weekend Warrior",
-          description: "Used transit on 15+ weekends",
-          icon: "weekend",
-          unlocked: true
-        },
-        {
-          id: "night",
-          title: "Night Owl",
-          description: "Took 10+ trips after 10pm",
-          icon: "night",
-          unlocked: false
-        },
-        {
-          id: "regular",
-          title: "Regular Commuter",
-          description: "Used transit 20+ days in a row",
-          icon: "regular",
-          unlocked: true
-        }
-      ]
+      achievement: "Transit Veteran",
+      milestoneReached: "You hit a major milestone this month!"
+    }
+  },
+  {
+    id: 'closing',
+    component: ClosingSlide,
+    title: 'Closing',
+    props: {
+      message: "Congrats! You had 6 amazing trips this month!",
+      minutesThisMonth: 842
     }
   }
 ];
