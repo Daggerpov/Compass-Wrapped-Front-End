@@ -13,7 +13,7 @@ const TimeRangeSelector: React.FC<TimeRangeSelectorProps> = ({
   getTimeRangeText 
 }) => {
   return (
-    <div className="text-center mb-10 animate-slide-up">
+    <div className="text-center mb-10 animate-slide-up w-full flex flex-col items-center">
       <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-translink-blue/15 to-translink-light-blue/30 text-translink-blue font-medium rounded-full mb-4 text-xs shadow-sm">
         Your Personal Transit Journey
       </span>

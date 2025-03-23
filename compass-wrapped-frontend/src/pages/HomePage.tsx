@@ -65,19 +65,21 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-translink-blue/5 via-white to-translink-gray/20 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-translink-blue/5 via-white to-translink-gray/20 relative overflow-hidden">
       <Background />
-      <Header timeRangeText={getTimeRangeText()} />
+      <div className="w-full">
+        <Header timeRangeText={getTimeRangeText()} />
+      </div>
 
-      <main className="container-custom py-14 sm:py-16 relative z-10">
-        <div className="max-w-2xl mx-auto">
+      <main className="container-custom w-full py-14 sm:py-16 relative z-10 flex flex-col items-center">
+        <div className="w-full max-w-2xl mx-auto flex flex-col items-center">
           <TimeRangeSelector 
             timeRange={timeRange} 
             setTimeRange={setTimeRange} 
             getTimeRangeText={getTimeRangeText} 
           />
 
-          <div className="mb-8 animate-slide-up transform hover:shadow-lg hover:translate-y-[-2px] transition-transform duration-300 shadow-md rounded-2xl overflow-hidden" style={{ animationDelay: '0.15s' }}>
+          <div className="w-full mb-8 animate-slide-up transform hover:shadow-lg hover:translate-y-[-2px] transition-transform duration-300 shadow-md rounded-2xl overflow-hidden" style={{ animationDelay: '0.15s' }}>
             <CSVInstructions />
           </div>
 
@@ -94,7 +96,9 @@ export default function HomePage() {
         </div>
       </main>
 
-      <Footer />
+      <div className="w-full mt-auto">
+        <Footer />
+      </div>
     </div>
   );
 }

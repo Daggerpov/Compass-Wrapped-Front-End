@@ -24,10 +24,10 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
   getTimeRangeText
 }) => {
   return (
-    <>
+    <div className="w-full flex flex-col items-center">
       <div 
         {...getRootProps()} 
-        className={`card p-8 text-center cursor-pointer transition-all duration-300 shadow-md rounded-2xl hover:shadow-card animate-slide-up ${
+        className={`card w-full max-w-2xl p-10 text-center cursor-pointer transition-all duration-300 shadow-md rounded-2xl hover:shadow-card animate-slide-up ${
           isDragActive 
             ? 'border-translink-blue border-2 bg-translink-light-blue/50 scale-[1.01]' 
             : isHovering
@@ -39,11 +39,11 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
         onMouseLeave={() => setIsHovering(false)}
       >
         <input {...getInputProps()} />
-        <div className="mb-6">
-          <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-translink-blue/20 to-translink-light-blue/40 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-inner ${
-            isDragActive ? 'scale-110 bg-translink-blue/20' : isHovering ? 'scale-105 bg-translink-blue/15' : ''
+        <div className="flex flex-col items-center justify-center">
+          <div className={`w-20 h-20 mx-auto mb-5 bg-gradient-to-br from-translink-blue/30 to-translink-light-blue/40 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-inner ${
+            isDragActive ? 'scale-110 bg-translink-blue/40' : isHovering ? 'scale-105 bg-translink-blue/20' : ''
           }`}>
-            <img src={compassCard} alt="Upload" className={`w-6 h-6 transition-all duration-300 ${isDragActive ? 'scale-110' : isHovering ? 'scale-105' : ''}`} />
+            <img src={compassCard} alt="Upload" className={`w-8 h-8 transition-all duration-300 ${isDragActive ? 'scale-110' : isHovering ? 'scale-105' : ''}`} />
           </div>
           <h3 className="text-xl font-semibold mb-3 text-gray-800">
             {isDragActive ? 'Drop to Upload Your File' : 'Upload Your CSV File'}
@@ -57,7 +57,7 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
       </div>
 
       {isUploaded && (
-        <div className="mt-8 text-center animate-slide-up" style={{ animationDelay: '0.45s' }}>
+        <div className="mt-8 text-center animate-slide-up w-full flex flex-col items-center" style={{ animationDelay: '0.45s' }}>
           <Button
             onClick={handleContinue}
             size="lg"
@@ -68,7 +68,7 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
           <p className="mt-4 text-base text-gray-500">See your transit patterns, favorite routes, and more</p>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
