@@ -33,30 +33,31 @@ const TimelineSlide: React.FC<TimelineSlideProps> = ({ timelineData = DEFAULT_DA
     return acc;
   }, {} as Record<string, TimelineData[]>);
 
+  // Get max trip count for scaling
   const maxTrips = Math.max(...timelineData.map(d => d.trip_count));
-  
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  
+
+  // Day order
+  const dayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const sortedDays = Object.keys(dayGroups).sort((a, b) => 
+    dayOrder.indexOf(a) - dayOrder.indexOf(b)
+  );
+
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-blue-50 px-6 py-10">
-      <div className="max-w-md w-full">
-        <h2 className="text-2xl font-bold text-translink-blue text-center mb-6">Your Transit Timeline</h2>
-        
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <h3 className="text-lg font-medium text-gray-800 mb-4">Busiest travel times</h3>
-          
-          {days.map(day => {
-            const dayData = dayGroups[day] || [];
-            if (dayData.length === 0) return null;
-            
+    <div className="width-container">
+      <div 
+        className={`border-2 border-dashed rounded-xl p-6 flex-col-center`}>
+        <div className="w-full h-full flex flex-col items-center justify-center bg-blue-50 px-6 py-10">
+          <h2 className="text-2xl font-bold text-translink-blue text-center mb-6">Your Transit Timeline</h2>
+
+          {sortedDays.map(day => {
             return (
-              <div key={day} className="mb-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">{day}</h4>
-                <div className="flex items-center h-8">
-                  {dayData.map(data => (
+              <div key={day} className="w-full mb-4">
+                <h3 className="text-lg font-medium text-translink-blue mb-2">{day}</h3>
+                <div className="flex items-end justify-between">
+                  {dayGroups[day].map((data, i) => (
                     <div 
-                      key={`${data.day_of_week}-${data.hour_of_day}`}
-                      className="relative flex-1 h-full"
+                      key={`${day}-${i}`}
+                      className="relative flex-1 h-16 flex items-end justify-center"
                     >
                       <div 
                         className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-b from-translink-blue to-translink-secondary rounded-full"

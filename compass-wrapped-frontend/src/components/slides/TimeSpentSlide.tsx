@@ -102,23 +102,32 @@ const TimeSpentSlide: React.FC<TimeSpentSlideProps> = ({
   }, []);
   
   return (
-    <div className="w-full h-full flex flex-col items-center justify-between bg-translink-blue text-white px-6 py-10">
-      <div className="text-center">
-        <p className="text-lg">You've spent</p>
-        <p className="text-3xl font-bold mb-2">{hoursSpent} hours</p>
-        <p className="text-lg">on <span className="font-bold">{transit}</span> this year!</p>
-      </div>
-      
-      <div className="my-8">
-        <img
-          src={skytrainImg}
-          alt="SkyTrain"
-          className="h-24 w-auto"
-        />
-      </div>
-      
-      <div className="mt-auto text-sm opacity-80 text-center">
-        <p>That's {Math.round(hoursSpent / 24)} full days of transit!</p>
+    <div className="width-container">
+      <div 
+        className={`border-2 border-dashed rounded-xl p-6 flex-col-center`}>
+        <div className="w-full h-full flex flex-col items-center justify-between bg-translink-blue text-white px-6 py-10">
+          <div className="text-center">
+            <p className="text-lg">You've spent</p>
+            <p className="text-3xl font-bold mb-2">{hoursSpent} hours</p>
+            <p className="text-lg">on <span className="font-bold">{transit}</span> this year!</p>
+          </div>
+          
+          <div className="my-8">
+            <img
+              src={skytrainImg}
+              alt="SkyTrain"
+              className="h-24 w-auto"
+            />
+          </div>
+          
+          <div className="mt-auto text-sm opacity-80 text-center">
+            <p>That's {Math.round(hoursSpent * 60 / 20)} 20-minute episodes of your favorite show!</p>
+            
+            <div className="flex justify-center items-center mt-4">
+              <canvas ref={canvasRef} width="80" height="80" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
