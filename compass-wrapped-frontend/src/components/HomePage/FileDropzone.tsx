@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, CardContent } from "../../ui/card";
-import { Button } from "../../ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import compassCardImg from '../../assets/new-from-figma/compass-card.png';
 import compassCardTapImg from '../../assets/new-from-figma/compass-card-tap.png';
-import { cn } from '../../lib/utils';
+import { cn } from '@/lib/utils';
 
 interface FileDropzoneProps {
   getRootProps?: any;
@@ -27,11 +27,11 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
   getTimeRangeText = () => "Annual"
 }) => {
   return (
-    <div className="w-full flex-col-center">
+    <div className="w-full flex flex-col items-center">
       <Card 
         {...getRootProps()} 
         className={cn(
-          "w-full max-w-lg mx-auto p-8 text-center cursor-pointer transition-all duration-300 hover:shadow-lg",
+          "w-full max-w-xl mx-auto p-8 text-center cursor-pointer transition-all duration-300 hover:shadow-lg",
           isDragActive 
             ? "border-primary border-2 bg-primary/10 scale-[1.01]" 
             : isHovering
@@ -42,7 +42,7 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
         onMouseLeave={() => setIsHovering(false)}
       >
         <input {...getInputProps()} />
-        <CardContent className="flex-col-center p-0">
+        <CardContent className="flex flex-col items-center p-0">
           <div className={cn(
             "w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary/20 to-primary/40 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-inner",
             isDragActive ? "scale-110" : isHovering ? "scale-105" : ""
@@ -68,7 +68,7 @@ const FileDropzone: React.FC<FileDropzoneProps> = ({
       </Card>
 
       {isUploaded && (
-        <div className="mt-8 text-center w-full flex-col-center animate-fade-in">
+        <div className="mt-8 text-center w-full flex flex-col items-center animate-fade-in">
           <Button
             onClick={handleContinue}
             size="lg"

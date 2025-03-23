@@ -1,11 +1,11 @@
 import React from 'react';
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Footer: React.FC = () => {
   return (
     <footer className="w-full relative z-10 border-t border-blue-100/50 mt-16 bg-gradient-to-t from-white to-translink-gray/20 backdrop-blur-sm text-center">
-      <div className="container mx-auto py-8">
-        <Card className="border-0 bg-transparent shadow-none">
+      <div className="container mx-auto py-8 flex justify-center">
+        <Card className="border-0 bg-transparent shadow-none w-full max-w-3xl">
           <CardContent className="flex flex-col sm:flex-row sm:justify-between items-center p-0">
             <div className="mb-4 sm:mb-0 text-center">
               <p className="text-sm text-gray-600 mb-1">© 2024 TransLink. All rights reserved.</p>

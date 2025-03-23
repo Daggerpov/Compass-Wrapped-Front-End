@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible";
-import { Button } from "./ui/button";
-import { Card, CardContent } from "./ui/card";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface CSVInstructionsProps {
   uploading: boolean;
@@ -13,14 +13,14 @@ const CSVInstructions: React.FC<CSVInstructionsProps> = ({ uploading, uploadedCo
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Card className="bg-white/95 rounded-lg shadow-sm p-5 sm:p-6 w-full max-w-lg mx-auto text-center">
+    <Card className="bg-white/95 rounded-lg shadow-sm p-5 sm:p-6 w-full max-w-xl mx-auto text-center">
       <CardContent className="p-0">
         <Collapsible
           open={isOpen}
           onOpenChange={setIsOpen}
           className="w-full"
         >
-          <div className="flex-center w-full mb-5">
+          <div className="flex justify-center w-full mb-5">
             <CollapsibleTrigger asChild>
               <Button variant="outline" className="flex items-center gap-2 mx-auto">
                 {isOpen ? 'Hide' : 'View'} CSV Instructions
@@ -43,11 +43,11 @@ const CSVInstructions: React.FC<CSVInstructionsProps> = ({ uploading, uploadedCo
 
           <CollapsibleContent className="space-y-4 text-center data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden transition-all">
             {uploading ? (
-              <div className="flex-col-center gap-4">
+              <div className="flex flex-col items-center gap-4">
                 <p>Uploading...</p>
               </div>
             ) : uploadedContent ? (
-              <div className="flex-col-center gap-4">
+              <div className="flex flex-col items-center gap-4">
                 <p>CSV file uploaded successfully!</p>
               </div>
             ) : (
