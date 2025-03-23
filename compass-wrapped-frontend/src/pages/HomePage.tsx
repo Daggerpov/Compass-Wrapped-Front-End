@@ -61,21 +61,23 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Background Elements */}
-      <img
-        src={skyline}
-        alt=""
-        className="absolute bottom-0 left-0 w-full opacity-10 pointer-events-none"
-      />
-      <img
-        src={skytrain}
-        alt=""
-        className="absolute bottom-20 right-0 w-1/2 opacity-20 pointer-events-none animate-slide-right"
-      />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <img
+          src={skyline}
+          alt=""
+          className="absolute bottom-0 left-0 w-full opacity-5 transform scale-110"
+        />
+        <img
+          src={skytrain}
+          alt=""
+          className="absolute bottom-20 right-0 w-1/2 opacity-10 animate-slide-right"
+        />
+      </div>
 
       {/* Header */}
-      <header className="header">
+      <header className="header backdrop-blur-sm bg-white/90 sticky top-0 z-50">
         <div className="container-custom py-4 flex flex-col sm:flex-row justify-between items-center">
           <div className="mb-4 sm:mb-0">
             <img src={translinkLogo} alt="TransLink Logo" className="img-logo" />
@@ -90,11 +92,13 @@ export default function HomePage() {
       </header>
 
       {/* Main Content */}
-      <main className="container-custom py-12">
+      <main className="container-custom py-12 relative z-10">
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12 animate-slide-up">
-            <h1 className="mb-4">Discover Your {getTimeRangeText()} Transit Journey</h1>
-            <p className="text-lg text-gray-600 mb-8">
+          <div className="text-center mb-16 animate-slide-up">
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+              Discover Your {getTimeRangeText()} Transit Journey
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               Upload your Compass Card data to see your personalized {timeRange}ly transit insights
             </p>
 
@@ -104,9 +108,9 @@ export default function HomePage() {
                 <button
                   key={range}
                   onClick={() => setTimeRange(range)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                     timeRange === range
-                      ? 'bg-translink-blue text-white'
+                      ? 'bg-translink-blue text-white shadow-md shadow-blue-200'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
@@ -117,32 +121,37 @@ export default function HomePage() {
           </div>
 
           {/* CSV Instructions */}
-          <div className="mb-12">
+          <div className="mb-12 animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <CSVInstructions />
           </div>
 
           {/* Upload Area */}
           <div 
             {...getRootProps()} 
-            className={`card p-8 text-center cursor-pointer transition-all duration-200 ${
-              isDragActive ? 'border-translink-blue border-2' : ''
+            className={`card p-12 text-center cursor-pointer transition-all duration-300 hover:shadow-lg animate-slide-up ${
+              isDragActive 
+                ? 'border-translink-blue border-2 bg-blue-50/50' 
+                : 'hover:border-gray-300'
             }`}
+            style={{ animationDelay: '0.4s' }}
           >
             <input {...getInputProps()} />
-            <div className="mb-4">
-              <img src={compassCard} alt="Upload" className="img-card mx-auto mb-6" />
-              <h3 className="text-xl font-semibold mb-2">Drop your CSV file here</h3>
-              <p className="text-gray-600">
+            <div className="mb-6">
+              <div className="w-32 h-32 mx-auto mb-6 bg-gray-50 rounded-full flex items-center justify-center">
+                <img src={compassCard} alt="Upload" className="w-20 h-20 opacity-80" />
+              </div>
+              <h3 className="text-2xl font-semibold mb-3">Drop your CSV file here</h3>
+              <p className="text-gray-600 max-w-md mx-auto">
                 or click to select your Compass Card transaction history
               </p>
             </div>
           </div>
 
           {isUploaded && (
-            <div className="mt-8 text-center animate-slide-up">
+            <div className="mt-8 text-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
               <button
                 onClick={handleContinue}
-                className="btn btn-primary"
+                className="btn btn-primary shadow-lg shadow-blue-200/50 hover:shadow-xl hover:shadow-blue-200/60 transform hover:-translate-y-0.5"
               >
                 View Your {getTimeRangeText()} Insights
                 <svg
@@ -165,7 +174,7 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="container-custom py-8">
+      <footer className="container-custom py-8 relative z-10">
         <div className="text-center text-sm text-gray-500">
           <p>© 2024 TransLink. All rights reserved.</p>
         </div>
