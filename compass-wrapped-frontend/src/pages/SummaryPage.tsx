@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
-import translinkLogo from '../assets/translink-logo.png';
+import translinkLogo from '../assets/translink-logo.svg';
 import compassCard from '../assets/compass-card.svg';
 import TripSummarySlide from '../components/slides/TripSummarySlide';
 import StopsSlide from '../components/slides/StopsSlide';
@@ -8,12 +8,36 @@ import TimelineSlide from '../components/slides/TimelineSlide';
 import PersonalitySlide from '../components/slides/PersonalitySlide';
 import AchievementsSlide from '../components/slides/AchievementsSlide';
 
-const slides = [
+interface PersonalitySlideProps {
+  personalityType: string;
+  commonTime: string;
+  details: string;
+}
+
+type SlideProps = PersonalitySlideProps | Record<string, never>;
+
+interface SlideConfig {
+  id: string;
+  component: React.ComponentType<SlideProps>;
+  title: string;
+  props?: SlideProps;
+}
+
+const slides: SlideConfig[] = [
   { id: 'summary', component: TripSummarySlide, title: 'Monthly Overview' },
   { id: 'stops', component: StopsSlide, title: 'Top Stations' },
   { id: 'timeline', component: TimelineSlide, title: 'Travel Timeline' },
-  { id: 'personality', component: PersonalitySlide, title: 'Transit Personality' },
-  { id: 'achievements', component: AchievementsSlide, title: 'Achievements' },
+  { 
+    id: 'personality', 
+    component: PersonalitySlide, 
+    title: 'Transit Personality',
+    props: {
+      personalityType: "Night Rider",
+      commonTime: "8:15 PM",
+      details: "184 hours on transit this month!"
+    }
+  },
+  { id: 'achievements', component: AchievementsSlide, title: 'Achievements' }
 ];
 
 export default function SummaryPage() {
@@ -42,7 +66,6 @@ export default function SummaryPage() {
   const handlers = useSwipeable({
     onSwipedLeft: nextSlide,
     onSwipedRight: prevSlide,
-    preventDefaultTouchmoveEvent: true,
     trackMouse: true
   });
 
@@ -86,7 +109,7 @@ export default function SummaryPage() {
                     opacity: index === activeIndex ? 1 : 0,
                   }}
                 >
-                  <Component />
+                  <Component {...(slide.props || {})} />
                 </div>
               );
             })}

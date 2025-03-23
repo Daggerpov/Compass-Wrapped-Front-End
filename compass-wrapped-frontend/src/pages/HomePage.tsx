@@ -6,7 +6,7 @@ import { DataContext } from '../context/DataContext';
 import { getAllAnalytics } from '../services/api';
 import translinkLogo from '../assets/translink-logo.svg';
 import compassCard from '../assets/compass-card.svg';
-import skyline from '../assets/skyline.svg';
+import skyline from '../assets/vancouver-skyline.svg';
 import skytrain from '../assets/skytrain.svg';
 import CSVInstructions from '../components/CSVInstructions';
 
