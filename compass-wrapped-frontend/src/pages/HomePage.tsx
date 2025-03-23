@@ -67,24 +67,14 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
-      {/* Background image - skyline with reduced size */}
-      <div className="absolute bottom-0 left-0 right-0 w-full h-24 z-0">
-        <img src={skyline} alt="Vancouver Skyline" className="w-full h-full object-cover object-bottom opacity-30" />
-      </div>
-      
-      {/* Animated SkyTrain with reduced size */}
-      <div className={`absolute bottom-24 transition-all duration-10000 ease-linear ${animateTrain ? 'left-full -translate-x-full' : '-left-20'}`}>
-        <img src={skytrain} alt="SkyTrain" className="h-6 w-auto" />
-      </div>
-      
       {/* Header */}
-      <header className="relative z-10 pt-6 pb-4 px-6 bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
-          <div className="w-24 mb-4 sm:mb-0">
-            <img src={translinkLogo} alt="TransLink Logo" className="w-full" />
+      <header className="header">
+        <div className="container-custom py-4 flex flex-col sm:flex-row justify-between items-center">
+          <div className="mb-4 sm:mb-0">
+            <img src={translinkLogo} alt="TransLink Logo" className="img-logo" />
           </div>
           <div className="flex items-center gap-3">
-            <img src={compassCard} alt="Compass Card" className="h-6 w-auto" />
+            <img src={compassCard} alt="Compass Card" className="img-icon" />
             <h2 className="text-xl font-medium text-translink-blue">Compass Wrapped 2023</h2>
           </div>
         </div>
@@ -92,25 +82,25 @@ const HomePage: React.FC = () => {
       
       {/* Main Content */}
       <main className="flex-grow flex items-center justify-center px-4 relative z-10">
-        <div className="max-w-6xl w-full mx-auto flex flex-col lg:flex-row items-center gap-12 py-8">
+        <div className="container-custom flex flex-col lg:flex-row items-center gap-12 py-12">
           {/* Left side - Compass Card */}
-          <div className="w-full lg:w-2/5 flex justify-center lg:justify-end transform hover:rotate-3 transition-transform">
-            <div className="w-full max-w-sm mx-auto mb-6">
-              <img src={compassCard} alt="Compass Card" className="w-full max-w-xs mx-auto drop-shadow-lg" style={{ maxWidth: "220px" }} />
+          <div className="w-full lg:w-2/5 flex justify-center lg:justify-end">
+            <div className="card-hover">
+              <img src={compassCard} alt="Compass Card" className="img-card" />
             </div>
           </div>
           
           {/* Right side - Upload Form */}
           <div className="w-full lg:w-3/5 lg:pl-4">
-            <div className="max-w-lg">
-              <h1 className="text-4xl font-bold text-translink-blue mb-4">Compass Wrapped 2023</h1>
+            <div className="max-w-lg slide-up">
+              <h1>Compass Wrapped 2023</h1>
               <p className="text-xl text-gray-600 mb-8">
                 Discover your transit journey patterns, most visited stops, and much more with your personalized year in review.
               </p>
               
               {/* Upload Area */}
               <div 
-                className={`bg-white rounded-xl shadow-lg p-8 mb-6 border-2 border-dashed transition-all ${
+                className={`card p-8 mb-6 border-2 border-dashed transition-custom ${
                   isDragging ? 'border-translink-blue bg-blue-50 scale-105' : 'border-gray-300'
                 }`}
                 onDragOver={handleDragOver}
@@ -148,7 +138,7 @@ const HomePage: React.FC = () => {
               </div>
               
               {/* How to get data */}
-              <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+              <div className="card p-6">
                 <h2 className="text-xl font-semibold mb-4 text-translink-blue flex items-center">
                   <svg className="w-5 h-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
@@ -168,9 +158,18 @@ const HomePage: React.FC = () => {
         </div>
       </main>
       
+      {/* Background Elements */}
+      <div className="absolute bottom-0 left-0 right-0 w-full h-20 z-0 opacity-20">
+        <img src={skyline} alt="Vancouver Skyline" className="w-full h-full object-cover object-bottom" />
+      </div>
+      
+      <div className={`absolute bottom-20 transition-all duration-10000 ease-linear ${animateTrain ? 'left-full -translate-x-full' : '-left-20'}`}>
+        <img src={skytrain} alt="SkyTrain" className="h-5 w-auto opacity-60" />
+      </div>
+      
       {/* Footer */}
       <footer className="relative z-10 py-6 bg-gray-50 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm">
+        <div className="container-custom text-center text-gray-500 text-sm">
           <p className="mb-2">Compass Wrapped is an unofficial tool and not affiliated with TransLink.</p>
           <p>TransLink and Compass Card are trademarks of the South Coast British Columbia Transportation Authority.</p>
         </div>
