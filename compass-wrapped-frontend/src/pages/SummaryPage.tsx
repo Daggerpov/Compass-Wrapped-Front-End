@@ -33,7 +33,58 @@ const slides: SlideConfig[] = [
       details: "184 hours on transit this month!"
     }
   },
-  { id: 'achievements', component: AchievementsSlide, title: 'Achievements' }
+  { 
+    id: 'achievements', 
+    component: AchievementsSlide, 
+    title: 'Achievements',
+    props: {
+      totalTrips: 342,
+      achievements: [
+        {
+          id: "early_bird",
+          title: "Early Bird",
+          description: "Caught the first train 20+ times",
+          icon: "early_bird",
+          unlocked: true
+        },
+        {
+          id: "distance",
+          title: "Distance Champion",
+          description: "Traveled over 1000km on transit",
+          icon: "distance",
+          unlocked: true
+        },
+        {
+          id: "explorer",
+          title: "City Explorer",
+          description: "Used 25+ different routes",
+          icon: "explorer",
+          unlocked: false
+        },
+        {
+          id: "weekend",
+          title: "Weekend Warrior",
+          description: "Used transit on 15+ weekends",
+          icon: "weekend",
+          unlocked: true
+        },
+        {
+          id: "night",
+          title: "Night Owl",
+          description: "Took 10+ trips after 10pm",
+          icon: "night",
+          unlocked: false
+        },
+        {
+          id: "regular",
+          title: "Regular Commuter",
+          description: "Used transit 20+ days in a row",
+          icon: "regular",
+          unlocked: true
+        }
+      ]
+    }
+  }
 ];
 
 export default function SummaryPage() {
