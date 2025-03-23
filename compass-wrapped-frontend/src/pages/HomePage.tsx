@@ -10,12 +10,11 @@ import {
   Background, 
   TimeRangeSelector, 
   FileDropzone, 
-  Footer,
-  IconsSection 
+  Footer 
 } from '../components/HomePage';
 
 export default function HomePage() {
-  const { setFile, setAnalyticsData, setLoading, setError, loading, error } = useContext(DataContext);
+  const { setFile, setAnalyticsData, setLoading, setError } = useContext(DataContext);
   const [isUploaded, setIsUploaded] = useState(false);
   const [timeRange, setTimeRange] = useState('month');
   const [isHovering, setIsHovering] = useState(false);
@@ -26,21 +25,15 @@ export default function HomePage() {
       const file = acceptedFiles[0];
       setLoading(true);
       setError(null);
-      setIsUploaded(false);  // Reset upload state while processing
       
       try {
         const response = await getAllAnalytics(file);
-        if (response && response.data) {
-          setAnalyticsData(response.data);
-          setFile(file);
-          setIsUploaded(true);
-        } else {
-          throw new Error('No data received from the server');
-        }
-      } catch (error: any) {
+        setAnalyticsData(response.data);
+        setFile(file);
+        setIsUploaded(true);
+      } catch (error) {
+        setError('Error processing file. Please try again.');
         console.error('Error:', error);
-        setError(error.message || 'Error processing file. Please try again.');
-        setIsUploaded(false);
       } finally {
         setLoading(false);
       }
@@ -72,21 +65,19 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex-col-center min-h-screen bg-gradient-to-b from-translink-blue/5 via-white to-translink-gray/20 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-translink-blue/5 via-white to-translink-gray/20 relative overflow-hidden">
       <Background />
-      <div className="w-full">
-        <Header timeRangeText={getTimeRangeText()} />
-      </div>
+      <Header timeRangeText={getTimeRangeText()} />
 
-      <main className="center-container py-14 sm:py-16 relative z-10">
-        <div className="width-container flex-col-center">
+      <main className="container-custom py-14 sm:py-16 relative z-10">
+        <div className="max-w-2xl mx-auto">
           <TimeRangeSelector 
             timeRange={timeRange} 
             setTimeRange={setTimeRange} 
             getTimeRangeText={getTimeRangeText} 
           />
 
-          <div className="w-full mb-8 animate-slide-up transform hover:shadow-lg hover:translate-y-[-2px] transition-transform duration-300 shadow-md rounded-2xl overflow-hidden" style={{ animationDelay: '0.15s' }}>
+          <div className="mb-8 animate-slide-up transform hover:shadow-lg hover:translate-y-[-2px] transition-transform duration-300 shadow-md rounded-2xl overflow-hidden" style={{ animationDelay: '0.15s' }}>
             <CSVInstructions />
           </div>
 
@@ -97,19 +88,13 @@ export default function HomePage() {
             isHovering={isHovering}
             setIsHovering={setIsHovering}
             isUploaded={isUploaded}
-            isLoading={loading}
-            error={error}
             handleContinue={handleContinue}
             getTimeRangeText={getTimeRangeText}
           />
         </div>
-        
-        <IconsSection />
       </main>
 
-      <div className="w-full mt-auto">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }
