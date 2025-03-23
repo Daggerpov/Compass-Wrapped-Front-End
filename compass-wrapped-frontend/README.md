@@ -1,6 +1,117 @@
-# Compass Wrapped Frontend
+# Compass Wrapped - TransLink Monthly Transit Insights
 
-A frontend application for visualizing TransLink Compass Card usage data, similar to Spotify Wrapped.
+A web application that analyzes Compass Card data to provide a personalized monthly transit summary, inspired by Spotify Wrapped.
+
+## Overview
+
+Compass Wrapped allows TransLink users to upload their Compass Card CSV data to generate a personalized transit summary, highlighting statistics such as:
+
+- Total trips taken
+- Most visited stops
+- Time spent on transit
+- Common transfer points
+- Transit personality type
+- Achievements based on travel patterns
+
+## Requirements
+
+- Node.js (v16+)
+- npm or yarn
+- Modern web browser
+
+## Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/Compass-Wrapped-Front-End.git
+   cd Compass-Wrapped-Front-End
+   ```
+
+2. Navigate to the frontend directory:
+   ```
+   cd compass-wrapped-frontend
+   ```
+
+3. Install dependencies:
+   ```
+   npm install
+   ```
+   or with yarn:
+   ```
+   yarn install
+   ```
+
+## Environment Configuration
+
+The application uses environment variables for API configuration:
+
+- Development: Create a `.env.development` file with:
+  ```
+  VITE_API_URL=http://localhost:8000
+  ```
+
+- Production: Create a `.env.production` file with:
+  ```
+  VITE_API_URL=https://compass-wrapped-back-end.vercel.app
+  ```
+
+## Running the Application
+
+1. Make sure you're in the `compass-wrapped-frontend` directory:
+   ```
+   cd compass-wrapped-frontend
+   ```
+   (Skip this step if you're already in the directory)
+
+2. Start the development server:
+   ```
+   npm run dev
+   ```
+   or with yarn:
+   ```
+   yarn dev
+   ```
+
+3. Open your browser and navigate to:
+   ```
+   http://localhost:5173
+   ```
+
+## Building for Production
+
+To create a production build:
+
+```
+cd compass-wrapped-frontend
+npm run build
+```
+
+The built files will be in the `dist` folder and can be served using any static file server.
+
+## Project Structure
+
+- `src/pages` - Main page components
+- `src/components` - Reusable UI components
+- `src/components/slides` - Individual slides for the summary view
+- `src/context` - React context for global state
+- `src/services` - API services
+- `src/assets` - Images and static files
+
+## API Integration
+
+The application connects to:
+- Development: `http://localhost:8000`
+- Production: `https://compass-wrapped-back-end.vercel.app`
+
+You can override these by setting the `VITE_API_URL` environment variable.
+
+## Data Privacy
+
+This application processes Compass Card data locally in your browser. The data is only sent to the backend API for analysis and is not stored.
+
+## License
+
+[CC BY-NC-ND 4.0](LICENSE.md)
 
 ## Features
 
@@ -24,52 +135,9 @@ A frontend application for visualizing TransLink Compass Card usage data, simila
 - TailwindCSS for styling
 - HTML-to-Image for generating shareable images
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v14+)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository
-```bash
-git clone https://github.com/your-username/compass-wrapped-frontend.git
-cd compass-wrapped-frontend
-```
-
-2. Install dependencies
-```bash
-npm install
-```
-
-3. Start the development server
-```bash
-npm run dev
-```
-
-4. Open your browser and navigate to `http://localhost:5173`
-
-## Backend Integration
-
-This frontend is designed to work with the Compass Wrapped Backend API. You can configure the API URL in `src/services/api.ts`.
-
-## Building for Production
-
-```bash
-npm run build
-```
-
-The build output will be in the `dist` directory, which you can serve using any static file server.
-
 ## Screenshots
 
 [Coming Soon]
-
-## License
-
-[MIT](LICENSE)
 
 ## Acknowledgements
 

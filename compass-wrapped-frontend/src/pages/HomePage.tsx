@@ -1,72 +1,65 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 import { getAllAnalytics } from '../services/api';
+import { useDropzone } from 'react-dropzone';
 import translinkLogo from '../assets/translink-logo.svg';
 import compassCard from '../assets/compass-card.svg';
-import skyline from '../assets/vancouver-skyline.svg';
+import skyline from '../assets/skyline.svg';
 import skytrain from '../assets/skytrain.svg';
+import CSVInstructions from '../components/CSVInstructions';
 
 const HomePage: React.FC = () => {
   const { setFile, setAnalyticsData, setLoading, setError } = useContext(DataContext);
   const [isDragging, setIsDragging] = useState(false);
-  const [animateTrain, setAnimateTrain] = useState(false);
+  const [isUploaded, setIsUploaded] = useState(false);
+  const [timeRange, setTimeRange] = useState('month');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setAnimateTrain(true);
-    }, 500);
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    // Handle file upload logic here
+    console.log('Files uploaded:', acceptedFiles);
+    setIsUploaded(true);
   }, []);
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = () => {
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
-    
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const file = e.dataTransfer.files[0];
-      if (file.name.endsWith('.csv')) {
-        handleFileUpload(file);
-      } else {
-        setError('Please upload a CSV file');
-      }
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'text/csv': ['.csv']
     }
+  });
+
+  const handleContinue = () => {
+    navigate('/summary');
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      handleFileUpload(file);
-    }
-  };
-
-  const handleFileUpload = async (file: File) => {
-    try {
-      setLoading(true);
-      setFile(file);
-      const response = await getAllAnalytics(file);
-      setAnalyticsData(response.data);
-      
-      navigate('/summary');
-    } catch (error) {
-      console.error('Error uploading file:', error);
-      setError('Error processing your data. Please try again.');
-    } finally {
-      setLoading(false);
+  const getTimeRangeText = () => {
+    switch (timeRange) {
+      case 'week':
+        return 'Weekly';
+      case 'month':
+        return 'Monthly';
+      case 'year':
+        return 'Yearly';
+      default:
+        return 'Transit';
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+      {/* Background Elements */}
+      <img
+        src={skyline}
+        alt=""
+        className="absolute bottom-0 left-0 w-full opacity-10 pointer-events-none"
+      />
+      <img
+        src={skytrain}
+        alt=""
+        className="absolute bottom-20 right-0 w-1/2 opacity-20 pointer-events-none animate-slide-right"
+      />
+
       {/* Header */}
       <header className="header">
         <div className="container-custom py-4 flex flex-col sm:flex-row justify-between items-center">
@@ -75,103 +68,92 @@ const HomePage: React.FC = () => {
           </div>
           <div className="flex items-center gap-3">
             <img src={compassCard} alt="Compass Card" className="img-icon" />
-            <h2 className="text-xl font-medium text-translink-blue">Compass Wrapped 2023</h2>
+            <h2 className="text-xl font-medium text-translink-blue">
+              Compass {getTimeRangeText()} Insights
+            </h2>
           </div>
         </div>
       </header>
-      
+
       {/* Main Content */}
-      <main className="flex-grow flex items-center justify-center px-4 relative z-10">
-        <div className="container-custom flex flex-col lg:flex-row items-center gap-12 py-12">
-          {/* Left side - Compass Card */}
-          <div className="w-full lg:w-2/5 flex justify-center lg:justify-end">
-            <div className="card-hover">
-              <img src={compassCard} alt="Compass Card" className="img-card" />
+      <main className="container-custom py-12">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-12 animate-slide-up">
+            <h1 className="mb-4">Discover Your {getTimeRangeText()} Transit Journey</h1>
+            <p className="text-lg text-gray-600 mb-8">
+              Upload your Compass Card data to see your personalized {timeRange}ly transit insights
+            </p>
+
+            {/* Time Range Selection */}
+            <div className="flex justify-center gap-4 mb-8">
+              {['week', 'month', 'year'].map((range) => (
+                <button
+                  key={range}
+                  onClick={() => setTimeRange(range)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    timeRange === range
+                      ? 'bg-translink-blue text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  {range.charAt(0).toUpperCase() + range.slice(1)}ly
+                </button>
+              ))}
             </div>
           </div>
-          
-          {/* Right side - Upload Form */}
-          <div className="w-full lg:w-3/5 lg:pl-4">
-            <div className="max-w-lg slide-up">
-              <h1>Compass Wrapped 2023</h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Discover your transit journey patterns, most visited stops, and much more with your personalized year in review.
+
+          {/* CSV Instructions */}
+          <div className="mb-12">
+            <CSVInstructions />
+          </div>
+
+          {/* Upload Area */}
+          <div 
+            {...getRootProps()} 
+            className={`card p-8 text-center cursor-pointer transition-all duration-200 ${
+              isDragActive ? 'border-translink-blue border-2' : ''
+            }`}
+          >
+            <input {...getInputProps()} />
+            <div className="mb-4">
+              <img src={compassCard} alt="Upload" className="img-card mx-auto mb-6" />
+              <h3 className="text-xl font-semibold mb-2">Drop your CSV file here</h3>
+              <p className="text-gray-600">
+                or click to select your Compass Card transaction history
               </p>
-              
-              {/* Upload Area */}
-              <div 
-                className={`card p-8 mb-6 border-2 border-dashed transition-custom ${
-                  isDragging ? 'border-translink-blue bg-blue-50 scale-105' : 'border-gray-300'
-                }`}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-              >
-                <div className="text-center">
-                  <div className="mb-6">
-                    <svg className="mx-auto h-16 w-16 text-translink-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-2 text-gray-800">Upload Your Compass Data</h3>
-                  <p className="text-gray-600 mb-4">
-                    Drag and drop your Compass Card CSV file here
-                  </p>
-                  <div className="flex items-center justify-center">
-                    <div className="h-px bg-gray-300 flex-grow mr-4"></div>
-                    <p className="text-sm text-gray-500">OR</p>
-                    <div className="h-px bg-gray-300 flex-grow ml-4"></div>
-                  </div>
-                  <div className="mt-4">
-                    <label className="bg-translink-blue hover:bg-translink-secondary text-white py-3 px-6 rounded-lg cursor-pointer transition-colors inline-block font-medium">
-                      Browse Files
-                      <input 
-                        type="file" 
-                        className="hidden" 
-                        accept=".csv" 
-                        onChange={handleFileChange}
-                      />
-                    </label>
-                  </div>
-                  <p className="mt-4 text-sm text-gray-500">Only CSV files are accepted</p>
-                </div>
-              </div>
-              
-              {/* How to get data */}
-              <div className="card p-6">
-                <h2 className="text-xl font-semibold mb-4 text-translink-blue flex items-center">
-                  <svg className="w-5 h-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                  </svg>
-                  How to get your Compass data
-                </h2>
-                <ol className="list-decimal list-inside space-y-2 text-gray-700 ml-2">
-                  <li className="pb-2 border-b border-gray-100">Log in to your Compass Card account at <a href="https://www.compasscard.ca" target="_blank" rel="noopener noreferrer" className="text-translink-blue hover:underline font-medium">compasscard.ca</a></li>
-                  <li className="py-2 border-b border-gray-100">Go to "Card Usage" section in your account dashboard</li>
-                  <li className="py-2 border-b border-gray-100">Select the date range for the year <span className="text-gray-500">(Jan 1, 2023 - Dec 31, 2023)</span></li>
-                  <li className="py-2 border-b border-gray-100">Click "Export" or "Download as CSV" button</li>
-                  <li className="pt-2">Upload the downloaded file using the form above</li>
-                </ol>
-              </div>
             </div>
           </div>
+
+          {isUploaded && (
+            <div className="mt-8 text-center animate-slide-up">
+              <button
+                onClick={handleContinue}
+                className="btn btn-primary"
+              >
+                View Your {getTimeRangeText()} Insights
+                <svg
+                  className="w-5 h-5 ml-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
       </main>
-      
-      {/* Background Elements */}
-      <div className="absolute bottom-0 left-0 right-0 w-full h-20 z-0 opacity-20">
-        <img src={skyline} alt="Vancouver Skyline" className="w-full h-full object-cover object-bottom" />
-      </div>
-      
-      <div className={`absolute bottom-20 transition-all duration-10000 ease-linear ${animateTrain ? 'left-full -translate-x-full' : '-left-20'}`}>
-        <img src={skytrain} alt="SkyTrain" className="h-5 w-auto opacity-60" />
-      </div>
-      
+
       {/* Footer */}
-      <footer className="relative z-10 py-6 bg-gray-50 border-t border-gray-200">
-        <div className="container-custom text-center text-gray-500 text-sm">
-          <p className="mb-2">Compass Wrapped is an unofficial tool and not affiliated with TransLink.</p>
-          <p>TransLink and Compass Card are trademarks of the South Coast British Columbia Transportation Authority.</p>
+      <footer className="container-custom py-8">
+        <div className="text-center text-sm text-gray-500">
+          <p>© 2024 TransLink. All rights reserved.</p>
         </div>
       </footer>
     </div>

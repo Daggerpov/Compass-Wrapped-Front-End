@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000'; // Change this to your backend URL
+const API_URL = import.meta.env.VITE_API_URL || 'https://compass-wrapped-back-end.vercel.app';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -8,6 +8,15 @@ const api = axios.create({
     'Content-Type': 'multipart/form-data',
   },
 });
+
+// Add response interceptor for error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error('API Error:', error.response?.data || error.message);
+    return Promise.reject(error);
+  }
+);
 
 export const uploadCSV = async (file: File) => {
   const formData = new FormData();

@@ -1,116 +1,60 @@
-import React, { useContext, useState } from 'react';
-// import { useNavigate } from 'react-router-dom'; // Removed unused import
-import { DataContext } from '../context/DataContext';
-import translinkLogo from '../assets/translink-logo.svg';
+import { useState, useEffect } from 'react';
+import { useSwipeable } from 'react-swipeable';
+import translinkLogo from '../assets/translink-logo.png';
 import compassCard from '../assets/compass-card.svg';
-
-// Import slideshow component
-import Slideshow from '../components/Slideshow';
-
-// Import slides
-import TotalTripsSlide from '../components/slides/TotalTripsSlide';
-import MostTraveledRouteSlide from '../components/slides/MostTraveledRouteSlide';
-import TimeSpentSlide from '../components/slides/TimeSpentSlide';
-import TransferSlide from '../components/slides/TransferSlide';
+import TripSummarySlide from '../components/slides/TripSummarySlide';
+import StopsSlide from '../components/slides/StopsSlide';
+import TimelineSlide from '../components/slides/TimelineSlide';
 import PersonalitySlide from '../components/slides/PersonalitySlide';
-import AchievementsSlide, { Achievement } from '../components/slides/AchievementsSlide';
-import MissingTapSlide from '../components/slides/MissingTapSlide';
+import AchievementsSlide from '../components/slides/AchievementsSlide';
 
-interface AchievementData {
-  title: string;
-  description: string;
-  id?: string;
-  icon?: string;
-}
+const slides = [
+  { id: 'summary', component: TripSummarySlide, title: 'Monthly Overview' },
+  { id: 'stops', component: StopsSlide, title: 'Top Stations' },
+  { id: 'timeline', component: TimelineSlide, title: 'Travel Timeline' },
+  { id: 'personality', component: PersonalitySlide, title: 'Transit Personality' },
+  { id: 'achievements', component: AchievementsSlide, title: 'Achievements' },
+];
 
-// Helper function to map achievement data from API to component props
-const mapAchievements = (achievements: AchievementData[] = []): Achievement[] => {
-  if (!achievements || !Array.isArray(achievements)) return [];
-  
-  return achievements.map((achievement, index) => ({
-    id: achievement.id || String(index),
-    title: achievement.title,
-    description: achievement.description,
-    icon: achievement.icon || 
-          achievement.title.toLowerCase().includes('early') ? 'early_bird' :
-          achievement.title.toLowerCase().includes('distance') ? 'distance' : 
-          achievement.title.toLowerCase().includes('explorer') ? 'explorer' :
-          achievement.title.toLowerCase().includes('weekend') ? 'weekend' : 'default',
-    unlocked: true // Assuming all achievements from the API are unlocked
-  }));
-};
+export default function SummaryPage() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-const SummaryPage: React.FC = () => {
-  // const navigate = useNavigate(); // Commented out since it's not used
-  const { analyticsData } = useContext(DataContext);
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const goToSlide = (index: number) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setActiveIndex(index);
+    setTimeout(() => setIsTransitioning(false), 300);
+  };
 
-  // Skip the redirect to allow viewing with mock data during development
-  /*
-  useEffect(() => {
-    // If no file is uploaded, redirect to homepage
-    if (!analyticsData) {
-      navigate('/');
+  const nextSlide = () => {
+    if (activeIndex < slides.length - 1) {
+      goToSlide(activeIndex + 1);
     }
-  }, [analyticsData, navigate]);
-  */
-
-  // Loading state
-  if (!analyticsData) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white p-8 rounded-lg shadow-md text-center max-w-md">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Loading your transit data...</h2>
-          <div className="animate-pulse flex space-x-4 mb-6">
-            <div className="flex-1 space-y-4 py-1">
-              <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
-              <div className="space-y-2">
-                <div className="h-4 bg-gray-200 rounded"></div>
-                <div className="h-4 bg-gray-200 rounded w-5/6 mx-auto"></div>
-              </div>
-            </div>
-          </div>
-          <p className="text-gray-600">Please wait while we analyze your Compass Card data...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Extract data from the API response
-  // Hard-coded values to match Figma designs
-  const totalTrips = 312; // Figma shows 312
-  const totalHours = 184; // Hard-coded for Figma
-  const missingTapIns = analyticsData.missing_taps?.missing_tap_ins || 0;
-  const missingTapOuts = analyticsData.missing_taps?.missing_tap_outs || 0;
-  const missingTapCount = missingTapIns + missingTapOuts;
-
-  // Custom data to match Figma
-  const mostUsedStop = {
-    stop_id: "1234",
-    stop_name: "Eastbound University Blvd",
-    count: 76
   };
 
-  const mostCommonTransfer = {
-    from_stop_id: "5678",
-    from_stop_name: "Broadway",
-    to_stop_id: "9012",
-    to_stop_name: "City Hall Stn",
-    count: 45
+  const prevSlide = () => {
+    if (activeIndex > 0) {
+      goToSlide(activeIndex - 1);
+    }
   };
 
-  // Determine personality type based on data - use Night Rider to match Figma
-  const personalityType = "Night Rider";
-  const personalityDetails = "184 hours on transit this year!";
-  const commonTime = "8:15 PM";
-  
-  // Process achievement data
-  const achievementsData = mapAchievements(analyticsData.achievements?.achievements || []);
+  const handlers = useSwipeable({
+    onSwipedLeft: nextSlide,
+    onSwipedRight: prevSlide,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true
+  });
 
-  // Handle slide change
-  const handleSlideChange = (index: number) => {
-    setActiveSlideIndex(index);
-  };
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [activeIndex]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -122,101 +66,74 @@ const SummaryPage: React.FC = () => {
           </div>
           <div className="flex items-center gap-3">
             <img src={compassCard} alt="Compass Card" className="img-icon" />
-            <h2 className="text-xl font-medium text-translink-blue">Compass Wrapped 2023</h2>
+            <h2 className="text-xl font-medium text-translink-blue">Monthly Transit Summary</h2>
           </div>
         </div>
       </header>
 
-      {/* Content area */}
-      <div className="container-custom py-8">
-        <div className="card p-6">
-          <Slideshow 
-            activeIndex={activeSlideIndex}
-            onChange={handleSlideChange}
-            showDots={true}
-            showArrows={true}
-          >
-            {/* Slide 1: Total Trips */}
-            <TotalTripsSlide totalTrips={totalTrips} />
-            
-            {/* Slide 2: Most Traveled Routes */}
-            {mostUsedStop && (
-              <MostTraveledRouteSlide mostUsedStop={mostUsedStop} />
-            )}
-            
-            {/* Slide 3: Time Spent */}
-            <TimeSpentSlide totalHours={totalHours} />
-            
-            {/* Slide 4: Transfers */}
-            {mostCommonTransfer && (
-              <TransferSlide transferData={mostCommonTransfer} />
-            )}
-            
-            {/* Slide 5: Personality */}
-            <PersonalitySlide 
-              personalityType={personalityType} 
-              commonTime={commonTime} 
-              details={personalityDetails} 
-            />
-            
-            {/* Slide 6: Achievements */}
-            <AchievementsSlide 
-              achievements={achievementsData.length > 0 ? achievementsData : [
-                {
-                  id: '1',
-                  title: 'Transit Explorer',
-                  description: 'Tried 5+ different routes',
-                  icon: 'explorer',
-                  unlocked: true
-                },
-                {
-                  id: '2',
-                  title: 'Early Bird',
-                  description: 'Frequent early morning trips',
-                  icon: 'early_bird',
-                  unlocked: true
-                },
-                {
-                  id: '3',
-                  title: 'Distance Warrior',
-                  description: 'Traveled over 100km',
-                  icon: 'distance',
-                  unlocked: false
-                },
-                {
-                  id: '4',
-                  title: 'Weekend Wanderer',
-                  description: 'Regular weekend trips',
-                  icon: 'weekend',
-                  unlocked: true
-                }
-              ]}
-              totalTrips={totalTrips}
-            />
-            
-            {/* Slide 7: Missing Taps */}
-            <MissingTapSlide missingTapCount={missingTapCount} totalTrips={totalTrips} />
-          </Slideshow>
+      {/* Carousel */}
+      <div className="container-custom py-8" {...handlers}>
+        <div className="card overflow-hidden">
+          <div className="relative h-[600px]">
+            {slides.map((slide, index) => {
+              const Component = slide.component;
+              return (
+                <div
+                  key={slide.id}
+                  className="carousel-slide p-6"
+                  style={{
+                    transform: `translateX(${(index - activeIndex) * 100}%)`,
+                    opacity: index === activeIndex ? 1 : 0,
+                  }}
+                >
+                  <Component />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Navigation Dots */}
+          <div className="carousel-nav">
+            {slides.map((slide, index) => (
+              <button
+                key={slide.id}
+                className={`carousel-dot ${index === activeIndex ? 'active' : ''}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to ${slide.title}`}
+              />
+            ))}
+          </div>
         </div>
-        
-        {/* Share buttons */}
-        <div className="flex justify-center mt-8 gap-4">
-          <button className="btn btn-primary flex items-center">
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-between mt-8">
+          <button
+            onClick={prevSlide}
+            className={`btn ${activeIndex === 0 ? 'btn-outline opacity-50' : 'btn-outline'}`}
+            disabled={activeIndex === 0}
+          >
             <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            Share Results
+            Previous
           </button>
-          <button className="btn btn-outline flex items-center">
-            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          <button
+            onClick={nextSlide}
+            className={`btn ${activeIndex === slides.length - 1 ? 'btn-outline opacity-50' : 'btn-primary'}`}
+            disabled={activeIndex === slides.length - 1}
+          >
+            Next
+            <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-            Download Report
           </button>
+        </div>
+
+        {/* Swipe Instructions */}
+        <div className="swipe-instruction">
+          Swipe or use arrow keys to navigate
         </div>
       </div>
     </div>
   );
-};
-
-export default SummaryPage;
+}
