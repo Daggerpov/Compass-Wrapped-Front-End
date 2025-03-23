@@ -35,13 +35,13 @@ const SlideCarousel: React.FC<SlideCarouselProps> = ({
 
   return (
     <div {...handlers} className="card overflow-hidden">
-      <div className="relative h-[600px]">
+      <div className="relative h-[550px]">
         {slides.map((slide, index) => {
           const Component = slide.component;
           return (
             <div
               key={slide.id}
-              className="carousel-slide p-6"
+              className="carousel-slide p-2"
               style={{
                 transform: `translateX(${(index - activeIndex) * 100}%)`,
                 opacity: index === activeIndex ? 1 : 0,
