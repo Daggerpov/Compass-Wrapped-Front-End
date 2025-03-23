@@ -7,128 +7,111 @@ interface TimeSpentSlideProps {
 const TimeSpentSlide: React.FC<TimeSpentSlideProps> = ({ totalHours }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
-  // Convert hours to days and remaining hours
-  const days = Math.floor(totalHours / 24);
-  const hours = totalHours % 24;
+  // These values are unused in the component but kept for reference
+  // const days = Math.floor(totalHours / 24);
+  // const hours = Math.round(totalHours % 24);
   
-  // Animation for progress ring
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvasRef.current) return;
     
+    const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     
     // Set canvas dimensions
-    const size = 200;
-    canvas.width = size;
-    canvas.height = size;
+    canvas.width = 200;
+    canvas.height = 200;
     
-    // Animation variables
-    let progress = 0;
-    const targetProgress = Math.min(1, totalHours / 168); // 168 hours in a week
-    const animationDuration = 1500; // ms
-    const startTime = Date.now();
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 80;
     
-    // Draw function
-    const draw = () => {
-      // Clear canvas
-      ctx.clearRect(0, 0, size, size);
+    // Animation function
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Calculate progress based on time elapsed
-      const elapsed = Date.now() - startTime;
-      progress = Math.min(elapsed / animationDuration, 1) * targetProgress;
-      
-      // Draw background circle
+      // Draw outer circle
       ctx.beginPath();
-      ctx.arc(size / 2, size / 2, size / 2 - 10, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-      ctx.lineWidth = 15;
+      ctx.lineWidth = 8;
       ctx.stroke();
       
-      // Draw progress arc
+      // Draw hour ticks
+      for (let i = 0; i < 12; i++) {
+        const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
+        const x1 = centerX + (radius - 10) * Math.cos(angle);
+        const y1 = centerY + (radius - 10) * Math.sin(angle);
+        const x2 = centerX + radius * Math.cos(angle);
+        const y2 = centerY + radius * Math.sin(angle);
+        
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+      
+      // Calculate position for hour hand
+      const date = new Date();
+      const hour = date.getHours() % 12;
+      const minute = date.getMinutes();
+      const hourAngle = ((hour + minute / 60) / 12) * 2 * Math.PI - Math.PI / 2;
+      
+      // Draw hour hand
       ctx.beginPath();
-      ctx.arc(size / 2, size / 2, size / 2 - 10, -Math.PI / 2, -Math.PI / 2 + progress * Math.PI * 2);
-      ctx.strokeStyle = '#FFD800';
-      ctx.lineWidth = 15;
-      ctx.stroke();
-      
-      // Draw inner circle with gradient
-      const gradient = ctx.createRadialGradient(
-        size / 2, size / 2, 0,
-        size / 2, size / 2, size / 2 - 20
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(
+        centerX + radius * 0.6 * Math.cos(hourAngle),
+        centerY + radius * 0.6 * Math.sin(hourAngle)
       );
-      gradient.addColorStop(0, '#0066B3');
-      gradient.addColorStop(1, '#004B8D');
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 4;
+      ctx.stroke();
       
+      // Calculate position for minute hand
+      const minuteAngle = (minute / 60) * 2 * Math.PI - Math.PI / 2;
+      
+      // Draw minute hand
       ctx.beginPath();
-      ctx.arc(size / 2, size / 2, size / 2 - 25, 0, Math.PI * 2);
-      ctx.fillStyle = gradient;
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(
+        centerX + radius * 0.8 * Math.cos(minuteAngle),
+        centerY + radius * 0.8 * Math.sin(minuteAngle)
+      );
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      // Draw center circle
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 5, 0, 2 * Math.PI);
+      ctx.fillStyle = 'white';
       ctx.fill();
       
-      // Draw text
-      ctx.fillStyle = 'white';
-      ctx.font = 'bold 48px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(Math.round(progress * totalHours).toString(), size / 2, size / 2 - 10);
-      
-      ctx.font = '14px sans-serif';
-      ctx.fillText('hours', size / 2, size / 2 + 20);
-      
-      // Continue animation if not complete
-      if (elapsed < animationDuration) {
-        requestAnimationFrame(draw);
-      }
+      requestAnimationFrame(animate);
     };
     
-    // Start animation
-    requestAnimationFrame(draw);
-    
-  }, [totalHours]);
+    animate();
+  }, []);
   
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-translink-secondary to-translink-blue text-white px-6 py-12">
-      <h2 className="text-2xl font-bold mb-6 text-center">Total Time Spent on Transit</h2>
+    <div className="w-full h-full flex flex-col items-center justify-center bg-[#0B2447] text-white px-6 py-10">
+      {/* Title */}
+      <h2 className="text-xl font-semibold text-center mb-4">Total Time Spent on Transit</h2>
       
-      <div className="relative mb-8">
-        <canvas ref={canvasRef} className="w-48 h-48" />
-        <div className="absolute top-0 right-0 -mt-4 -mr-4 bg-translink-yellow rounded-full p-3 text-translink-blue">
-          <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-      </div>
-      
-      <div className="text-center mb-6">
-        <p className="text-xl">That's <span className="font-bold">{days} days</span> and <span className="font-bold">{hours.toFixed(1)} hours</span> of travel</p>
-        <p className="text-lg mt-2">Imagine where else you could've gone!</p>
-      </div>
-      
-      {/* Week comparison visualization */}
-      <div className="w-full max-w-md">
-        <p className="text-sm mb-2 text-center">Compared to a typical 40-hour work week:</p>
-        <div className="relative h-8 bg-white bg-opacity-20 rounded-lg overflow-hidden">
-          <div 
-            className="h-full bg-translink-yellow rounded-lg transition-all duration-1000 ease-out"
-            style={{ width: `${Math.min(100, (totalHours / 40) * 100)}%` }}
-          ></div>
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <span className="text-xs font-medium">{Math.round((totalHours / 40) * 100)}% of work week</span>
+      <div className="flex flex-col items-center">
+        {/* Clock visualization */}
+        <canvas ref={canvasRef} className="w-48 h-48 mb-4"></canvas>
+        
+        {/* Hours display */}
+        <div className="text-center">
+          <div className="text-4xl font-bold">
+            You've spent {totalHours} hours
           </div>
-        </div>
-      </div>
-      
-      {/* Fun fact */}
-      <div className="mt-8 bg-white bg-opacity-10 rounded-lg p-4 max-w-md">
-        <div className="flex items-start">
-          <div className="flex-shrink-0 mt-1">
-            <svg className="w-5 h-5 text-translink-yellow" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-            </svg>
-          </div>
-          <div className="ml-3">
-            <p className="text-sm">In this time, you could have watched about <span className="font-bold">{Math.round(totalHours / 2)}</span> movies or binged <span className="font-bold">{Math.round(totalHours / 0.5)}</span> TikTok videos!</p>
+          <div className="text-lg mt-2">
+            on the SkyTrain this year!
           </div>
         </div>
       </div>

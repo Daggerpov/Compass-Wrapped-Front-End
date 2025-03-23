@@ -2,6 +2,8 @@ import React, { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../context/DataContext';
 import { toPng } from 'html-to-image';
+import translinkLogo from '../assets/translink-logo.svg';
+import compassCard from '../assets/compass-card.svg';
 
 const SharePage: React.FC = () => {
   const { analyticsData, file } = useContext(DataContext);
@@ -39,8 +41,21 @@ const SharePage: React.FC = () => {
   const personalityType = analyticsData.personality?.personality_type || 'Transit Rider';
   
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="max-w-2xl mx-auto px-4">
+    <div className="min-h-screen bg-gray-100">
+      {/* Header */}
+      <header className="relative z-10 pt-6 pb-4 px-6 bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
+          <div className="w-48 mb-4 sm:mb-0">
+            <img src={translinkLogo} alt="TransLink Logo" className="w-full" />
+          </div>
+          <div className="flex items-center gap-3">
+            <img src={compassCard} alt="Compass Card" className="h-10 w-auto" />
+            <h2 className="text-xl font-medium text-translink-blue">Compass Wrapped 2023</h2>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-2xl mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-translink-blue mb-2">Share Your Compass Wrapped</h1>
           <p className="text-gray-600">Generate an image to share your transit year in review</p>

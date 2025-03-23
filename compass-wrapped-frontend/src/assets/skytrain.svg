@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120">
+  <!-- Track -->
+  <line x1="10" y1="100" x2="230" y2="100" stroke="#333" stroke-width="6" />
+  <line x1="10" y1="100" x2="230" y2="100" stroke="#666" stroke-width="4" />
+  
+  <!-- Train body -->
+  <rect x="40" y="50" width="160" height="40" rx="10" fill="#0066B3" />
+  <rect x="45" y="55" width="150" height="30" rx="8" fill="#0066B3" stroke="#004080" stroke-width="1" />
+  
+  <!-- Front window -->
+  <path d="M45,70 L60,60 L60,80 L45,70 Z" fill="#B3D9FF" />
+  
+  <!-- Side windows -->
+  <rect x="70" y="60" width="20" height="15" rx="2" fill="#B3D9FF" />
+  <rect x="100" y="60" width="20" height="15" rx="2" fill="#B3D9FF" />
+  <rect x="130" y="60" width="20" height="15" rx="2" fill="#B3D9FF" />
+  <rect x="160" y="60" width="20" height="15" rx="2" fill="#B3D9FF" />
+  
+  <!-- Doors -->
+  <rect x="80" y="78" width="5" height="7" fill="#CCCCCC" />
+  <rect x="110" y="78" width="5" height="7" fill="#CCCCCC" />
+  <rect x="140" y="78" width="5" height="7" fill="#CCCCCC" />
+  <rect x="170" y="78" width="5" height="7" fill="#CCCCCC" />
+  
+  <!-- TransLink logo -->
+  <rect x="85" y="78" width="10" height="10" fill="#FFD800" />
+  <text x="90" y="87" font-family="Arial" font-size="8" text-anchor="middle" fill="#004080">TL</text>
+  
+  <!-- Wheels -->
+  <circle cx="60" cy="100" r="8" fill="#333" />
+  <circle cx="60" cy="100" r="4" fill="#666" />
+  <circle cx="90" cy="100" r="8" fill="#333" />
+  <circle cx="90" cy="100" r="4" fill="#666" />
+  <circle cx="150" cy="100" r="8" fill="#333" />
+  <circle cx="150" cy="100" r="4" fill="#666" />
+  <circle cx="180" cy="100" r="8" fill="#333" />
+  <circle cx="180" cy="100" r="4" fill="#666" />
+  
+  <!-- Pantograph -->
+  <line x1="120" y1="50" x2="120" y2="30" stroke="#666" stroke-width="2" />
+  <polyline points="110,30 130,30" stroke="#666" stroke-width="2" fill="none" />
+  <line x1="120" y1="30" x2="120" y2="20" stroke="#666" stroke-width="1" />
+  
+  <!-- Overhead wire -->
+  <line x1="10" y1="20" x2="230" y2="20" stroke="#999" stroke-width="1" />
+</svg> 

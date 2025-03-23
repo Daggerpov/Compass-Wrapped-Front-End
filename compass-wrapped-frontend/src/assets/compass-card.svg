@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 216">
+  <!-- Card body -->
+  <rect x="5" y="5" width="330" height="206" rx="10" fill="#0066B3" />
+  <rect x="10" y="10" width="320" height="196" rx="8" fill="#0066B3" stroke="#004080" stroke-width="1" />
+  
+  <!-- Compass Logo -->
+  <circle cx="170" cy="108" r="60" fill="#FFFFFF" />
+  <circle cx="170" cy="108" r="58" fill="#0066B3" />
+  <circle cx="170" cy="108" r="50" fill="#FFFFFF" />
+  
+  <!-- Compass needle -->
+  <path d="M170 78 L175 108 L170 138 L165 108 Z" fill="#0066B3" />
+  <path d="M140 108 L170 103 L200 108 L170 113 Z" fill="#0066B3" />
+  <circle cx="170" cy="108" r="8" fill="#0066B3" />
+  
+  <!-- Card chip -->
+  <rect x="50" y="50" width="35" height="30" rx="3" fill="#FFD800" />
+  <rect x="55" y="55" width="25" height="5" fill="#FFB000" />
+  <rect x="55" y="65" width="25" height="5" fill="#FFB000" />
+  
+  <!-- Tap here indicator -->
+  <circle cx="270" cy="60" r="25" fill="#FFFFFF" opacity="0.8" />
+  <text x="270" y="65" font-family="Arial" font-size="10" text-anchor="middle" fill="#0066B3">TAP HERE</text>
+  
+  <!-- Card number -->
+  <text x="50" y="160" font-family="Arial" font-size="14" fill="#FFFFFF">0123 4567 8901 2345</text>
+  
+  <!-- Expiry -->
+  <text x="50" y="180" font-family="Arial" font-size="10" fill="#FFFFFF">VALID THRU: 12/25</text>
+</svg> 
