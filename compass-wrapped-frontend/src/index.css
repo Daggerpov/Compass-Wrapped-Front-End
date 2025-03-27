@@ -1,7 +1,7 @@
-/* Reset the tailwind imports to avoid any issues */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Replace the rest of the file with standard CSS */
 :root {
