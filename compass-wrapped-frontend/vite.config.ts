@@ -8,5 +8,14 @@ export default defineConfig({
     alias: {
       '@': '/src'
     }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://compass-wrapped-back-end.up.railway.app',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 })

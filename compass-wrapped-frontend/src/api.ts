@@ -7,7 +7,9 @@ const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
-  }
+    'Accept': 'application/json',
+  },
+  withCredentials: false
 });
 
 export interface ApiResponse<T> {
@@ -256,6 +258,7 @@ export const processCSV = async (file: File): Promise<ApiResponse<UserStatsRespo
     const stats = await parseCSV(file);
     
     try {
+      console.log('Sending data to backend API:', API_URL);
       const response = await api.post('/stats/user', stats);
       return {
         success: true,
